@@ -2,6 +2,7 @@ import os
 # import sqlite3
 
 import polars as pl
+import openpyxl
 
 
 BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
@@ -55,15 +56,10 @@ def main():
     xlsx_folder = os.path.join(BASE_FOLDER, 'inputs\\raw_files\\ACS\\2011_2015\\migration')
     xlsx_file = 'county-to-county-by-age-2011-2015-current-residence-sort.xlsx'
 
-    # Use pandas for Excel reading, then convert to Polars
-    import pandas as pd
-    xlsx = pd.ExcelFile(os.path.join(xlsx_folder, xlsx_file))
-    df_pandas = pd.concat([xlsx.parse(sheet_name=name, header=None, names=columns,
-                                     skiprows=4, skipfooter=8)
-                          for name in xlsx.sheet_names if name != 'Puerto Rico'])
-
-    # Convert pandas DataFrame to Polars
-    df = pl.from_pandas(df_pandas)
+    # Read Excel file using Polars
+    xlsx_path = os.path.join(xlsx_folder, xlsx_file)
+    df = pl.read_excel(source=xlsx_path,
+                       read_options={'skip_rows': 3})
 
     # Filter out rows with 'XXX' in O_STFIPS
     df = df.filter(~pl.col('O_STFIPS').str.contains('XXX'))
