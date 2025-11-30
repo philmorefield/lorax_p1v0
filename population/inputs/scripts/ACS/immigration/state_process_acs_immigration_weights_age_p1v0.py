@@ -2,7 +2,6 @@ import os
 # import sqlite3
 
 import polars as pl
-import openpyxl
 
 
 BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
@@ -41,25 +40,34 @@ def parse_age_groups(s):
 
 
 def main():
-    columns = ['D_STFIPS', 'O_STFIPS', 'AGE', 'D_STATE', 'D_POP',
-               'D_POP_MOE', 'D_NONMOVERS', 'D_NONMOVERS_MOE', 'D_MOVERS',
-               'D_MOVERS_MOE', 'D_MOVERS_SAME_ST', 'D_MOVERS_SAME_ST_MOE',
-               'D_MOVERS_FROM_DIFF_ST',
-               'D_MOVERS_DIFF_ST_MOE', 'D_MOVERS_FROM_ABROAD',
-               'D_MOVERS_FROM_ABROAD_MOE', 'O_STATE', 'O_POP',
-               'O_POP_MOE', 'O_NONMOVERS', 'O_NOMMOVERS_MOE', 'O_MOVERS',
-               'O_MOVERS_MOE', 'O_MOVERS_SAME_ST', 'O_MOVERS_SAME_ST_MOE',
-               'O_MOVERS_FROM_DIFF_ST',
-               'O_MOVERS_DIFF_ST_MOE', 'O_MOVERS_PUERTO_RICO',
-               'O_MOVERS_PUERTO_RICO_MOE', 'TOTAL_FLOW', 'TOTAL_FLOW_MOE']
+    columns = ('D_STFIPS', 'D_COFIPS', 'O_STFIPS', 'O_COFIPS', 'AGE', 'D_STATE', 'D_COUNTY', 'D_POP',
+                'D_POP_MOE', 'D_NONMOVERS', 'D_NONMOVERS_MOE', 'D_MOVERS',
+                'D_MOVERS_MOE', 'D_MOVERS_SAME_CY', 'D_MOVERS_SAME_CY_MOE',
+                'D_MOVERS_FROM_DIFF_CY_SAME_ST',
+                'D_MOVERS_FROM_DIFF_CY_SAME_ST_MOE', 'D_MOVERS_FROM_DIFF_ST',
+                'D_MOVERS_DIFF_ST_MOE', 'D_MOVERS_FROM_ABROAD',
+                'D_MOVERS_FROM_ABROAD_MOE', 'O_STATE', 'O_COUNTY', 'O_POP',
+                'O_POP_MOE', 'O_NONMOVERS', 'O_NOMMOVERS_MOE', 'O_MOVERS',
+                'O_MOVERS_MOE', 'O_MOVERS_SAME_CY', 'O_MOVERS_SAME_CY_MOE',
+                'O_MOVERS_FROM_DIFF_CY_SAME_ST',
+                'O_MOVERS_FROM_DIFF_CY_SAME_ST_MOE', 'O_MOVERS_FROM_DIFF_ST',
+                'O_MOVERS_DIFF_ST_MOE', 'O_MOVERS_PUERTO_RICO',
+                'O_MOVERS_PUERTO_RICO_MOE', 'TOTAL_FLOW', 'TOTAL_FLOW_MOE')
 
     xlsx_folder = os.path.join(BASE_FOLDER, 'inputs\\raw_files\\ACS\\2011_2015\\migration')
     xlsx_file = 'county-to-county-by-age-2011-2015-current-residence-sort.xlsx'
 
     # Read Excel file using Polars
     xlsx_path = os.path.join(xlsx_folder, xlsx_file)
-    df = pl.read_excel(source=xlsx_path,
-                       read_options={'skip_rows': 3})
+    dfs = [df[:-6, :] for df in pl.read_excel(source=xlsx_path,
+                                              sheet_id=0,
+                                              drop_empty_rows=True,
+                                              read_options={'header_row': None,
+                                                            'skip_rows': 4}).values()]
+    for df in dfs:
+        df.columns = columns
+
+    df = pl.concat(items=dfs, how='vertical_relaxed')
 
     # Filter out rows with 'XXX' in O_STFIPS
     df = df.filter(~pl.col('O_STFIPS').str.contains('XXX'))
@@ -69,13 +77,11 @@ def main():
     df = df.filter(pl.col('O_STFIPS').is_in(foreign)).select(['D_STFIPS', 'AGE', 'TOTAL_FLOW'])
 
     # Convert D_STFIPS to string and zero-fill
-    df = df.with_columns([
-        pl.col('D_STFIPS').cast(pl.Int32).cast(pl.Utf8).str.zfill(2).alias('DESTINATION_FIPS')
-    ])
+    df = df.with_columns(pl.col('D_STFIPS').cast(pl.Int8).cast(pl.String).str.zfill(2).alias('DESTINATION_FIPS'))
 
-    # Replace AGE values using AGE_MAP - create mapping expression
-    age_mapping = pl.col('AGE').replace_strict(AGE_MAP, default=pl.col('AGE'), return_dtype=pl.Utf8)
-    df = df.with_columns(age_mapping.alias('AGE'))
+    # Replace AGE values using AGE_MAP
+    df = df.with_columns(pl.col('AGE').cast(pl.Int8).cast(pl.String).alias('AGE'))
+    df = df.with_columns(pl.col('AGE').replace(AGE_MAP).alias('AGE'))
     df = df.select(['DESTINATION_FIPS', 'AGE', 'TOTAL_FLOW'])
 
     # Check for nulls
@@ -85,21 +91,16 @@ def main():
     df = df.group_by(['DESTINATION_FIPS', 'AGE']).agg(pl.col('TOTAL_FLOW').sum())
 
     # Add age sum column
-    df = df.with_columns(
-        pl.col('TOTAL_FLOW').sum().over('AGE').alias('AGE_SUM')
-    )
+    df = df.with_columns(pl.col('TOTAL_FLOW').sum().over('AGE').alias('AGE_SUM'))
 
     # Calculate weights
-    df = df.with_columns(
-        ((pl.col('TOTAL_FLOW') / pl.col('AGE_SUM')) * 1000000).alias('WEIGHT_x_10^6')
-    )
+    df = df.with_columns(((pl.col('TOTAL_FLOW') / pl.col('AGE_SUM')) * 1000000).alias('WEIGHT_x_10^6'))
 
     # Pivot to wide format using Polars syntax
-    df = df.pivot(
-        on='AGE',
-        index='DESTINATION_FIPS',
-        values='WEIGHT_x_10^6'
-    ).fill_null(0)
+    df = df.select(['DESTINATION_FIPS', 'AGE', 'WEIGHT_x_10^6'])
+    df = df.pivot(on='AGE',
+                  index='DESTINATION_FIPS',
+                  values='WEIGHT_x_10^6').fill_null(0)
 
     # Reorder columns to match original order
     column_order = ['DESTINATION_FIPS'] + list(AGE_MAP.values())
@@ -107,34 +108,28 @@ def main():
     df = df.select(available_columns)
 
     # Expand age groups - convert to long format first
-    df_long = df.unpivot(
-        index='DESTINATION_FIPS',
-        variable_name='AGE_GROUP',
-        value_name='WEIGHT'
-    )
+    df_long = df.unpivot(index='DESTINATION_FIPS',
+                         variable_name='AGE_GROUP',
+                         value_name='WEIGHT')
 
     # Expand age groups
     expanded_rows = []
     for row in df_long.iter_rows(named=True):
         ages = parse_age_groups(row['AGE_GROUP'])
         for age in ages:
-            expanded_rows.append({
-                'DESTINATION_FIPS': row['DESTINATION_FIPS'],
-                'AGE': age,
-                'WEIGHT': row['WEIGHT']
-            })
+            expanded_rows.append({'DESTINATION_FIPS': row['DESTINATION_FIPS'],
+                                  'AGE': age,
+                                  'WEIGHT': row['WEIGHT']})
 
     # Create new DataFrame from expanded rows
     df_expanded = pl.DataFrame(expanded_rows)
 
     # Pivot back to wide format with individual ages as columns
-    df = df_expanded.pivot(
-        on='AGE',
-        index='DESTINATION_FIPS',
-        values='WEIGHT'
-    ).fill_null(0)
+    df = df_expanded.pivot(on='AGE',
+                           index='DESTINATION_FIPS',
+                           values='WEIGHT').fill_null(0)
 
     # Write to CSV
-    df.write_csv(os.path.join(PROCESSED_FILES, 'state_acs_immigration_weights_age_2011_2015.csv'))
+    df.write_csv(os.path.join(PROCESSED_FILES, 'immigration', 'state_acs_immigration_weights_age_2011_2015.csv'))
 if __name__ == '__main__':
     main()
