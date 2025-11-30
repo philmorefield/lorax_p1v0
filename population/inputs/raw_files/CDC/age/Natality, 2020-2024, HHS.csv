@@ -1,0 +1,127 @@
+"Notes","Age of Mother 9","Age of Mother 9 Code","HHS Region of Residence","HHS Region of Residence Code",Births,Female Population,Fertility Rate
+,"15-19 years","15-19","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",15362,2397742,6.41
+,"15-19 years","15-19","HHS Region #2  NJ, NY","HHS2",37110,4330746,8.57
+,"15-19 years","15-19","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",57236,4882462,11.72
+,"15-19 years","15-19","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",183064,10670141,17.16
+,"15-19 years","15-19","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",105731,8432925,12.54
+,"15-19 years","15-19","HHS Region #6  AR, LA, NM, OK, TX","HHS6",157590,7520668,20.95
+,"15-19 years","15-19","HHS Region #7  IA, KS, MO, NE","HHS7",35972,2351795,15.30
+,"15-19 years","15-19","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",24112,2113237,11.41
+,"15-19 years","15-19","HHS Region #9  AZ, CA, HI, NV","HHS9",87845,8149522,10.78
+,"15-19 years","15-19","HHS Region #10  AK, ID, OR, WA","HHS10",23033,2205434,10.44
+"Total","15-19 years","15-19",,,727055,53054672,13.70
+,"20-24 years","20-24","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",76995,2513393,30.63
+,"20-24 years","20-24","HHS Region #2  NJ, NY","HHS2",203148,4541406,44.73
+,"20-24 years","20-24","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",255379,4877862,52.35
+,"20-24 years","20-24","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",755332,10874147,69.46
+,"20-24 years","20-24","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",483007,8607705,56.11
+,"20-24 years","20-24","HHS Region #6  AR, LA, NM, OK, TX","HHS6",592805,7444773,79.63
+,"20-24 years","20-24","HHS Region #7  IA, KS, MO, NE","HHS7",159432,2421576,65.84
+,"20-24 years","20-24","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",127333,2194730,58.02
+,"20-24 years","20-24","HHS Region #9  AZ, CA, HI, NV","HHS9",401848,8163986,49.22
+,"20-24 years","20-24","HHS Region #10  AK, ID, OR, WA","HHS10",126255,2231363,56.58
+"Total","20-24 years","20-24",,,3181534,53870941,59.06
+,"25-29 years","25-29","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",162686,2429702,66.96
+,"25-29 years","25-29","HHS Region #2  NJ, NY","HHS2",359851,4883604,73.69
+,"25-29 years","25-29","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",433976,4992447,86.93
+,"25-29 years","25-29","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",1084654,11052424,98.14
+,"25-29 years","25-29","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",818652,8484495,96.49
+,"25-29 years","25-29","HHS Region #6  AR, LA, NM, OK, TX","HHS6",794449,7495551,105.99
+,"25-29 years","25-29","HHS Region #7  IA, KS, MO, NE","HHS7",256878,2249486,114.19
+,"25-29 years","25-29","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",223464,2226086,100.38
+,"25-29 years","25-29","HHS Region #9  AZ, CA, HI, NV","HHS9",690204,8821365,78.24
+,"25-29 years","25-29","HHS Region #10  AK, ID, OR, WA","HHS10",214378,2486400,86.22
+"Total","25-29 years","25-29",,,5039192,55121560,91.42
+,"30-34 years","30-34","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",261673,2533159,103.30
+,"30-34 years","30-34","HHS Region #2  NJ, NY","HHS2",519576,5042654,103.04
+,"30-34 years","30-34","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",526635,5348600,98.46
+,"30-34 years","30-34","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",1055750,11667606,90.49
+,"30-34 years","30-34","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",881989,8710651,101.25
+,"30-34 years","30-34","HHS Region #6  AR, LA, NM, OK, TX","HHS6",723791,7790936,92.90
+,"30-34 years","30-34","HHS Region #7  IA, KS, MO, NE","HHS7",237963,2285849,104.10
+,"30-34 years","30-34","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",221996,2253525,98.51
+,"30-34 years","30-34","HHS Region #9  AZ, CA, HI, NV","HHS9",845647,9340954,90.53
+,"30-34 years","30-34","HHS Region #10  AK, ID, OR, WA","HHS10",239267,2701996,88.55
+"Total","30-34 years","30-34",,,5514287,57675930,95.61
+,"35-39 years","35-39","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",156776,2481034,63.19
+,"35-39 years","35-39","HHS Region #2  NJ, NY","HHS2",331968,4799651,69.17
+,"35-39 years","35-39","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",293832,5217419,56.32
+,"35-39 years","35-39","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",535470,11147050,48.04
+,"35-39 years","35-39","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",428957,8443842,50.80
+,"35-39 years","35-39","HHS Region #6  AR, LA, NM, OK, TX","HHS6",361697,7600547,47.59
+,"35-39 years","35-39","HHS Region #7  IA, KS, MO, NE","HHS7",106193,2281081,46.55
+,"35-39 years","35-39","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",112139,2157097,51.99
+,"35-39 years","35-39","HHS Region #9  AZ, CA, HI, NV","HHS9",527483,8779399,60.08
+,"35-39 years","35-39","HHS Region #10  AK, ID, OR, WA","HHS10",135469,2595153,52.20
+"Total","35-39 years","35-39",,,2989984,55502273,53.87
+,"40-44 years","40-44","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",32518,2334285,13.93
+,"40-44 years","40-44","HHS Region #2  NJ, NY","HHS2",82082,4578544,17.93
+,"40-44 years","40-44","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",63631,4963622,12.82
+,"40-44 years","40-44","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",117980,10947250,10.78
+,"40-44 years","40-44","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",84807,8239066,10.29
+,"40-44 years","40-44","HHS Region #6  AR, LA, NM, OK, TX","HHS6",77197,7264406,10.63
+,"40-44 years","40-44","HHS Region #7  IA, KS, MO, NE","HHS7",20409,2216077,9.21
+,"40-44 years","40-44","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",22934,2056179,11.15
+,"40-44 years","40-44","HHS Region #9  AZ, CA, HI, NV","HHS9",128000,8293517,15.43
+,"40-44 years","40-44","HHS Region #10  AK, ID, OR, WA","HHS10",29307,2428255,12.07
+"Total","40-44 years","40-44",,,658865,53321201,12.36
+,"45-49 years","45-49","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",2193,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #2  NJ, NY","HHS2",6518,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",4499,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",7378,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",5305,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #6  AR, LA, NM, OK, TX","HHS6",4524,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #7  IA, KS, MO, NE","HHS7",1135,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",1411,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #9  AZ, CA, HI, NV","HHS9",10217,Not Available,Not Available
+,"45-49 years","45-49","HHS Region #10  AK, ID, OR, WA","HHS10",1920,Not Available,Not Available
+"Total","45-49 years","45-49",,,45100,Not Available,Not Available
+"Total",,,,,18156017,328546577,55.26
+"---"
+"Dataset: Natality, 2016-2024 expanded"
+"Query Parameters:"
+"Age of Mother 9: 15-19 years; 20-24 years; 25-29 years; 30-34 years; 35-39 years; 40-44 years; 45-49 years"
+"Year: 2020; 2021; 2022; 2023; 2024"
+"Group By: Age of Mother 9; HHS Region of Residence"
+"Show Totals: True"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 1,000"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/natality-expanded.html for more information."
+"---"
+"Query Date: Oct 21, 2025 4:37:33 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Natality on CDC WONDER Online Database. Data are from the Natality Records 2016-2024, as compiled from data provided by"
+"the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at"
+"http://wonder.cdc.gov/natality-expanded-current.html on Oct 21, 2025 4:37:33 PM"
+"---"
+Caveats:
+"1. 'Not Available' appears when the denominator population for a rate measure is not available."
+"2. Each birth record represents one liveborn infant."
+"3. Fertility rates are calculated as the number of births divided by the number of females age 15 - 44 years old in the given"
+"year(s). When the numerator is sub-set by mother's age, mother's race, mother's hispanicity, location, or year of birth, then"
+"the same sub-set for age, race, hispanicity, location and year applies to the denominator population. However, if you sub-set"
+"mother's age selecting some years not in the 15 - 44 range, those years of mother's age ouside this range will not be included"
+"in the denominator population. If you sub-set mother's age selecting only years outside the 15 - 44 range, then ""Not"
+"Available"" is reported for the denominator population."
+"4. Birth rates and fertility rates are calculated using the following populations: The populations for year 2024 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 26, 2025. The"
+"2024 population estimates are based on the Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial"
+"population count. The populations for year 2023 are from the postcensal single race series of July 1st estimates of the resident"
+"population, released by Census Bureau on June 27, 2024. The 2023 population estimates are based on the Blended Base produced by"
+"the US Census Bureau in lieu of the April 1, 2020 decennial population count. The populations for year 2022 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 22, 2023. The"
+"2022 population estimates are based on the Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial"
+"population count. The populations for year 2021 are from the postcensal single race series of July 1st estimates of the resident"
+"population, released by Census Bureau on June 30, 2022. The 2021 population estimates are based on the Blended Base produced by"
+"the US Census Bureau in lieu of the April 1, 2020 decennial population count. The populations for year 2020 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on July 27, 2021. The"
+"populations for year 2019 are from the postcensal single race series of July 1st estimates of the resident population, released"
+"by Census Bureau on June 25, 2020; The populations for year 2018 are from the postcensal single race series of July 1st"
+"estimates of the resident population, released by Census Bureau on June 21, 2019; The populations for year 2017 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 21, 2018; The"
+"populations for year 2016 are from the postcensal single race series of July 1st estimates of the resident population, released"
+"by Census Bureau on June 22, 2017. More information:"
+"http://wonder.cdc.gov/wonder/help/natality-expanded.html#Denominator-Population-Sources."

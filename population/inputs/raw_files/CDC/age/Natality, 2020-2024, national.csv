@@ -1,0 +1,57 @@
+"Notes","Age of Mother 9","Age of Mother 9 Code",Births,Female Population,Fertility Rate
+,"15-19 years","15-19",727055,53054672,13.70
+,"20-24 years","20-24",3181534,53870941,59.06
+,"25-29 years","25-29",5039192,55121560,91.42
+,"30-34 years","30-34",5514287,57675930,95.61
+,"35-39 years","35-39",2989984,55502273,53.87
+,"40-44 years","40-44",658865,53321201,12.36
+,"45-49 years","45-49",45100,Not Available,Not Available
+"Total",,,18156017,328546577,55.26
+"---"
+"Dataset: Natality, 2016-2024 expanded"
+"Query Parameters:"
+"Age of Mother 9: 15-19 years; 20-24 years; 25-29 years; 30-34 years; 35-39 years; 40-44 years; 45-49 years"
+"Year: 2020; 2021; 2022; 2023; 2024"
+"Group By: Age of Mother 9"
+"Show Totals: True"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 1,000"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/natality-expanded.html for more information."
+"---"
+"Query Date: Oct 21, 2025 4:37:55 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Natality on CDC WONDER Online Database. Data are from the Natality Records 2016-2024, as compiled from data provided by"
+"the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at"
+"http://wonder.cdc.gov/natality-expanded-current.html on Oct 21, 2025 4:37:55 PM"
+"---"
+Caveats:
+"1. 'Not Available' appears when the denominator population for a rate measure is not available."
+"2. Each birth record represents one liveborn infant."
+"3. Fertility rates are calculated as the number of births divided by the number of females age 15 - 44 years old in the given"
+"year(s). When the numerator is sub-set by mother's age, mother's race, mother's hispanicity, location, or year of birth, then"
+"the same sub-set for age, race, hispanicity, location and year applies to the denominator population. However, if you sub-set"
+"mother's age selecting some years not in the 15 - 44 range, those years of mother's age ouside this range will not be included"
+"in the denominator population. If you sub-set mother's age selecting only years outside the 15 - 44 range, then ""Not"
+"Available"" is reported for the denominator population."
+"4. Birth rates and fertility rates are calculated using the following populations: The populations for year 2024 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 26, 2025. The"
+"2024 population estimates are based on the Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial"
+"population count. The populations for year 2023 are from the postcensal single race series of July 1st estimates of the resident"
+"population, released by Census Bureau on June 27, 2024. The 2023 population estimates are based on the Blended Base produced by"
+"the US Census Bureau in lieu of the April 1, 2020 decennial population count. The populations for year 2022 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 22, 2023. The"
+"2022 population estimates are based on the Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial"
+"population count. The populations for year 2021 are from the postcensal single race series of July 1st estimates of the resident"
+"population, released by Census Bureau on June 30, 2022. The 2021 population estimates are based on the Blended Base produced by"
+"the US Census Bureau in lieu of the April 1, 2020 decennial population count. The populations for year 2020 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on July 27, 2021. The"
+"populations for year 2019 are from the postcensal single race series of July 1st estimates of the resident population, released"
+"by Census Bureau on June 25, 2020; The populations for year 2018 are from the postcensal single race series of July 1st"
+"estimates of the resident population, released by Census Bureau on June 21, 2019; The populations for year 2017 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 21, 2018; The"
+"populations for year 2016 are from the postcensal single race series of July 1st estimates of the resident population, released"
+"by Census Bureau on June 22, 2017. More information:"
+"http://wonder.cdc.gov/wonder/help/natality-expanded.html#Denominator-Population-Sources."

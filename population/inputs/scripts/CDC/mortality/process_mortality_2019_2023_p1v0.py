@@ -1,8 +1,3 @@
-'''
-Revised: 2025-03-27
-
-
-'''
 import glob
 import os
 import sqlite3
@@ -10,10 +5,15 @@ import sqlite3
 from itertools import product
 
 import pandas as pd
-from polars import dataframe
 
-na_values = ['Suppressed', 'Not Applicable', 'None', 'Missing', 'Not Available', 'Unreliable']
 
+BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
+if os.path.isdir('C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'):
+    BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'
+PROCESSED_FILES = os.path.join(BASE_FOLDER, 'inputs\\processed_files')
+CDC_FILES = os.path.join(BASE_FOLDER, 'inputs\\raw_files\\CDC\\age')
+
+NA_VALUES = ['Suppressed', 'Not Applicable', 'None', 'Missing', 'Not Available', 'Unreliable']
 AGE_GROUP_SORT_MAP = {'0-4': 0,
                       '5-9': 1,
                       '10-14': 2,
@@ -33,28 +33,21 @@ AGE_GROUP_SORT_MAP = {'0-4': 0,
                       '80-84': 16,
                       '85+': 17}
 
-if os.path.exists('D:\\OneDrive\\ICLUS_v3'):
-    ICLUS_FOLDER = 'D:\\OneDrive\\ICLUS_v3'
-else:
-    ICLUS_FOLDER = 'D:\\projects\\ICLUS_v3'
-
-CSV_FILES = os.path.join(ICLUS_FOLDER, 'population\\inputs\\raw_files\\CDC\\age')
-DATABASE_FOLDER = os.path.join(ICLUS_FOLDER, 'population\\inputs\\databases')
-MIGRATION_DB = os.path.join(DATABASE_FOLDER, 'migration.sqlite')
 
 
-def get_cofips_and_state():
-    query = 'SELECT COFIPS, STUSPS AS STABBR \
-             FROM fips_to_urb20_bea10_hhs'
-    con = sqlite3.connect(MIGRATION_DB)
-    df = pd.read_sql_query(sql=query, con=con)
-    con.close()
 
-    return df
+
+
+def get_stfips():
+    csv = os.path.join(BASE_FOLDER, 'inputs', 'fips_to_urb20_bea10_hhs.csv')
+    df = pd.read_csv(filepath_or_buffer=csv)
+    df['STFIPS'] = df['COFIPS'].astype(str).str.zfill(5).str[:2]
+
+    return df[['STFIPS', 'POPULATION20', 'HHS']].drop_duplicates()
 
 
 def create_template():
-    cofips_all = get_cofips_and_state()
+    stfips_all = get_stfips()
 
     ages = ['1',
             '1-4',
@@ -76,52 +69,22 @@ def create_template():
             '80-84',
             '85+']
 
-    cofips = list(cofips_all.COFIPS.values)
+    stfips = list(stfips_all.STFIPS.values)
     genders = ['MALE', 'FEMALE']
 
-    df = pd.DataFrame(list(product(cofips, ages, genders)),
-                      columns=['COFIPS', 'AGE_GROUP', 'SEX'])
+    df = pd.DataFrame(list(product(stfips, ages, genders)),
+                      columns=['STFIPS', 'AGE_GROUP', 'SEX'])
 
     return df
 
-
-def apply_county_level_mortality(df):
-
-    dataframes = []
-
-    # first apply county level mortality; not all cohorts will have values
-    for csv in glob.glob(os.path.join(CSV_FILES, 'Underlying*.csv')):
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=na_values)
-        if '85+' in os.path.basename(csv):
-            continue
-        if 'county' not in os.path.basename(csv):
-            continue
-        if 'Sex' not in temp.columns:
-            if 'female' in os.path.basename(csv).lower():
-                temp['Sex'] = 'Female'
-            else:
-                temp['Sex'] = 'Male'
-        temp = temp[['County Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
-        temp.columns = ['COFIPS', 'SEX', 'AGE_GROUP', 'MORTALITY']
-        temp.dropna(how='any', inplace=True)
-        temp['COFIPS'] = temp['COFIPS'].astype(int).astype(str).str.zfill(5)
-
-        dataframes.append(temp)
-
-    mort = pd.concat(objs=dataframes, ignore_index=True)
-    mort['SEX'] = mort['SEX'].str.upper()
-
-    df = df.merge(right=mort, how='left', on=['COFIPS', 'AGE_GROUP', 'SEX'])
-
-    return df
 
 def apply_state_level_mortality(df):
 
     dataframes = []
 
     # process age groups <85 first
-    for csv in glob.glob(os.path.join(CSV_FILES, 'Underlying*.csv')):
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=na_values)
+    for csv in glob.glob(os.path.join(CDC_FILES, 'Underlying*.csv')):
+        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
         if 'state' not in os.path.basename(csv):
             continue
         if '85+' in os.path.basename(csv):
@@ -140,8 +103,8 @@ def apply_state_level_mortality(df):
         dataframes.append(temp)
 
     # process the 85+ age group
-    for csv in glob.glob(os.path.join(CSV_FILES, 'Underlying*.csv')):
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=na_values)
+    for csv in glob.glob(os.path.join(CDC_FILES, 'Underlying*.csv')):
+        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
         if '85+' not in os.path.basename(csv):
             continue
         if 'state' not in os.path.basename(csv):
@@ -164,28 +127,22 @@ def apply_state_level_mortality(df):
     mort['STFIPS'] = mort['STFIPS'].astype(int).astype(str).str.zfill(2)
     mort['SEX'] = mort['SEX'].str.upper()
 
-    df['STFIPS'] = df['COFIPS'].str[:2]
     df = df.merge(right=mort, how='left', on=['STFIPS', 'SEX', 'AGE_GROUP'])
-    df.loc[df.MORTALITY.isnull(), 'MORTALITY'] = df['STATE_MORTALITY']
-
-    df = df.drop(columns=['STFIPS', 'STATE_MORTALITY'])
+    df = df.rename(columns={'STATE_MORTALITY': 'MORTALITY'})
 
     return df
 
 
 def apply_hhs_level_mortality(df):
-    query = 'SELECT COFIPS, HHS AS HHS_REGION \
-             FROM fips_to_urb20_bea10_hhs'
-    con = sqlite3.connect(MIGRATION_DB)
-    hhs = pd.read_sql_query(sql=query, con=con)
-    con.close()
+    hhs = get_stfips()[['STFIPS', 'HHS']].drop_duplicates()
+    hhs = hhs.rename(columns={'HHS': 'HHS_REGION'})
 
     dataframes = []
 
     for sex in ['male', 'female']:
         fn = f'Underlying Cause of Death, 2019-2023, {sex}, HHS.csv'
-        csv = os.path.join(CSV_FILES, fn)
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=na_values)
+        csv = os.path.join(CDC_FILES, fn)
+        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
         if 'Sex' not in temp.columns:
             if sex == 'female':
                 temp['Sex'] = 'Female'
@@ -198,8 +155,8 @@ def apply_hhs_level_mortality(df):
         dataframes.append(temp)
 
     # add 85+ age group to the dataframe
-    csv = os.path.join(CSV_FILES, 'Underlying Cause of Death, 2019-2023, 85+, HHS.csv')
-    temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=na_values)
+    csv = os.path.join(CDC_FILES, 'Underlying Cause of Death, 2019-2023, 85+, HHS.csv')
+    temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
     temp['Five-Year Age Groups Code'] = '85+'
     temp = temp[['HHS Region Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
     temp.columns = ['HHS_REGION', 'SEX', 'AGE_GROUP', 'HHS_MORTALITY']
@@ -212,7 +169,7 @@ def apply_hhs_level_mortality(df):
     mort['SEX'] = mort['SEX'].str.upper()
 
     # identify the HHS region for each county
-    df = df.merge(right=hhs, how='left', on='COFIPS')
+    df = df.merge(right=hhs, how='left', on='STFIPS')
 
     # join HHS-level mortality rates
     df['HHS_REGION'] = df['HHS_REGION'].astype(int)
@@ -232,8 +189,8 @@ def combine_under_5_age_groups(df):
     young = df.copy().query('AGE_GROUP == "1" | AGE_GROUP == "1-4"')
     young['WEIGHT'] = young['AGE_GROUP'].map(weight_map)
     young['MORT_x_WEIGHT'] = young.eval('MORTALITY * WEIGHT')
-    young['NUMERATOR'] = young.groupby(by=['COFIPS', 'SEX'])['MORT_x_WEIGHT'].transform('sum')
-    young['DENOMENATOR'] = young.groupby(by=['COFIPS', 'SEX'])['WEIGHT'].transform('sum')
+    young['NUMERATOR'] = young.groupby(by=['STFIPS', 'SEX'])['MORT_x_WEIGHT'].transform('sum')
+    young['DENOMENATOR'] = young.groupby(by=['STFIPS', 'SEX'])['WEIGHT'].transform('sum')
     young['MORTALITY'] = young.eval('NUMERATOR / DENOMENATOR')
     young['AGE_GROUP'] = '0-4'
     young = young.drop(columns=['WEIGHT', 'NUMERATOR', 'DENOMENATOR', 'MORT_x_WEIGHT'])
@@ -241,26 +198,6 @@ def combine_under_5_age_groups(df):
 
     df = df.query('AGE_GROUP != "1" & AGE_GROUP != "1-4"')
     df = pd.concat(objs=[df, young], ignore_index=True, verify_integrity=True)
-
-    return df
-
-
-def make_fips_changes(df):
-    con =sqlite3.connect(MIGRATION_DB)
-    query = 'SELECT OLD_FIPS AS COFIPS, NEW_FIPS \
-             FROM fips_or_name_changes'
-    df_fips = pd.read_sql_query(sql=query, con=con)
-    con.close()
-
-    df = df.merge(right=df_fips,
-                  how='left',
-                  on='COFIPS')
-
-    df.loc[~df.NEW_FIPS.isnull(), 'COFIPS'] = df['NEW_FIPS']
-    df = df.drop(columns='NEW_FIPS')
-
-    # TODO: this mean should be weighted by population, technically
-    df = df.groupby(by=['COFIPS', 'AGE_GROUP', 'SEX'], as_index=False).mean()
 
     return df
 
@@ -279,28 +216,18 @@ def main():
     # create the template Dataframe that hold all county/race/age combinations
     # and start merging information
     df = create_template()
-    df = apply_county_level_mortality(df)
+
     df = apply_state_level_mortality(df)
     df = apply_hhs_level_mortality(df)
+    assert df.MORTALITY.isnull().sum() == 0, "Some mortality rates are still null!"
+
     df = combine_under_5_age_groups(df)
-    df = make_fips_changes(df)
 
-    df = df.sort_values(by=['AGE_GROUP', 'COFIPS'], key=lambda x: x.map(AGE_GROUP_SORT_MAP))
+    df = df.sort_values(by=['AGE_GROUP', 'STFIPS'], key=lambda x: x.map(AGE_GROUP_SORT_MAP))
     df = df.rename(columns={'MORTALITY': 'MORTALITY_RATE_100K',
-                            'COFIPS': 'GEOID'})
+                            'STFIPS': 'GEOID'})
 
-    # expand age groups
-    df['AGE_GROUP'] = df['AGE_GROUP'].apply(lambda x: convert_age_group_to_list(x))
-    df = df.explode('AGE_GROUP', ignore_index=True).rename(columns={'AGE_GROUP': 'AGE'})
-
-    # con = sqlite3.connect(os.path.join(DATABASE_FOLDER, 'cdc.sqlite'))
-    # df.to_sql(name='mortality_2019_2023_county',
-    #           con=con,
-    #           if_exists='replace',
-    #           index=False)
-    # con.close()
-
-    df.to_csv(os.path.join(DATABASE_FOLDER, 'mortality_2019_2023_county.csv'), index=False)
+    df.to_csv(os.path.join(PROCESSED_FILES, 'mortality', 'mortality_2019_2023_county.csv'), index=False)
 
     print("Finished!")
 

@@ -4,7 +4,7 @@ Purpose: Create county-level population projections using the 2025 vintage
          Congressional Budget Office (CBO) projections
 Created: November 10th, 2025
 
-20251110 - p1v1: Use CBO 2025 population estimate as the launch population
+20251110 - p1v0: Use CBO 2025 population estimate as the launch population
 """
 import os
 import time
@@ -12,16 +12,15 @@ import time
 import polars as pl
 
 
-BASE_FOLDER = 'D:\\OneDrive\\ICLUS_v3\\population'
-if os.path.isdir('C:\\Users\\philm\\OneDrive\\ICLUS_v3\\population'):
-    BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\ICLUS_v3\\population'
+BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
+if os.path.isdir('C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'):
+    BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'
 
 INPUT_FOLDER = os.path.join(BASE_FOLDER, 'inputs')
 CENSUS_CSV_FOLDER = os.path.join(INPUT_FOLDER, 'raw_files', 'Census')
-DATABASE_FOLDER = os.path.join(INPUT_FOLDER, 'databases')
-OUTPUT_FOLDER = os.path.join(BASE_FOLDER, 'outputs', 'CBO')
-OUTPUT_DATABASE = os.path.join(OUTPUT_FOLDER, 'p1v1.sqlite')
-OUTPUT_DATABASE_URI = f'sqlite:{OUTPUT_DATABASE}'
+PROCESSED_FILES = os.path.join(INPUT_FOLDER, 'processed_files')
+OUTPUT_FOLDER = os.path.join(BASE_FOLDER, 'outputs')
+
 
 # Define five-year age groups
 AGE_GROUPS = ['0-4', '5-9', '10-14', '15-19', '20-24', '25-29', '30-34',
@@ -163,10 +162,7 @@ def set_launch_population():
     df = df.with_columns(pl.col('POPULATION').round().alias('POPULATION'))
     df = df.select(['GEOID', 'AGE_GROUP', 'SEX', 'POPULATION'])
 
-    population_r.write_database(table_name='population_by_age_group_sex_CBO_r',
-                                connection=OUTPUT_DATABASE_URI,
-                                if_table_exists='replace',
-                                engine='adbc')
+    population_r.write_csv(os.path.join(OUTPUT_FOLDER, 'population_by_age_group_sex_CBO_r'))
 
     return df
 
@@ -409,20 +405,9 @@ class Projector():
         print("Calculating mortality...", end='')
 
         # Read single-year mortality rates and convert to age groups
-        mort_rates = os.path.join(DATABASE_FOLDER, 'mortality_2019_2023_county.csv')
+        mort_rates = os.path.join(PROCESSED_FILES, 'mortality', 'mortality_2019_2023_county.csv')
         county_mort_rates = (pl.read_csv(source=mort_rates)
                              .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(5).alias('GEOID')))
-
-        # Convert single ages to age groups and aggregate mortality rates
-        county_mort_rates = county_mort_rates.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-
-        # For age groups, we need to weight-average the mortality rates by population
-        # For simplicity, we'll take the mean mortality rate within each age group
-        county_mort_rates = county_mort_rates.group_by(['GEOID', 'AGE_GROUP', 'SEX']).agg(
-            pl.col('MORTALITY_RATE_100K').mean()
-        )
 
         df = self.current_pop.clone()
         df = df.join(other=county_mort_rates,
@@ -431,7 +416,7 @@ class Projector():
                         coalesce=True)
 
         # Read CBO mortality adjustments - need to aggregate single-year to age groups
-        cbo_mort_csv = os.path.join(DATABASE_FOLDER, 'cbo_mortality_p1v1.csv')
+        cbo_mort_csv = os.path.join(PROCESSED_FILES, 'mortality', 'cbo_mortality_p1v0.csv')
         cbo_mort_multiply = pl.read_csv(source=cbo_mort_csv).with_columns(pl.col('AGE'))
         cbo_mort_multiply = cbo_mort_multiply.select(['AGE', 'SEX', f'ASMR_{self.current_projection_year}'])
         cbo_mort_multiply = cbo_mort_multiply.rename({f'ASMR_{self.current_projection_year}': 'MORT_MULTIPLY'})
@@ -647,7 +632,7 @@ class Projector():
         df = self.current_pop.filter((pl.col('SEX') == 'FEMALE') & (pl.col('AGE_GROUP').is_in(fertile_age_groups)))
 
         # get CBO fertility rate adjustments - aggregate single year to age groups
-        fert_multiply = (pl.read_csv(source=os.path.join(DATABASE_FOLDER, 'cbo_fertility_p1v1.csv'))
+        fert_multiply = (pl.read_csv(source=os.path.join(DATABASE_FOLDER, 'cbo_fertility_p1v0.csv'))
                          .select(['AGE', f'ASFR_{self.current_projection_year}'])
                          .rename({f'ASFR_{self.current_projection_year}': 'FERT_MULT'}))
 
@@ -706,7 +691,7 @@ class Projector():
 if __name__ == '__main__':
     print(time.ctime())
     main(scenario='CBO',
-         version='p1v1',
+         version='p1v0',
          fert_calibr_pct=0.0,
          mort_calibr_pct=0.0)
     print(time.ctime())

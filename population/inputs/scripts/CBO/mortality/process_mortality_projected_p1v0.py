@@ -1,21 +1,16 @@
-'''
-20251110 - p1v01 - Process as single year ages
-'''
-
 import os
-# import sqlite3
 
 import pandas as pd
 
 
-BASE_FOLDER = 'D:\\OneDrive\\ICLUS_v3\\population'
-if os.path.isdir('C:\\Users\\philm\\OneDrive\\ICLUS_v3\\population'):
-    BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\ICLUS_v3\\population'
+BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
+if os.path.isdir('C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'):
+    BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'
 
 CBO_FOLDER = os.path.join(BASE_FOLDER, 'inputs\\raw_files\\CBO')
 CSV_FOLDER = '57059-2025-09-Demographic-Projections\\CSV files'
 CSV_FILE = 'mortalityRates_byYearAgeSex.csv'
-OUTPUT_DB = os.path.join(BASE_FOLDER, 'inputs\\databases\\cbo.sqlite')
+PROCESSED_FILES = os.path.join(BASE_FOLDER, 'inputs\\processed_files')
 
 def get_cbo_population():
     cols = ['AGE',
@@ -56,7 +51,7 @@ def get_cbo_population():
     df = pd.concat(df_list, ignore_index=True)
     df = df.melt(id_vars=['YEAR', 'AGE'], var_name='SEX', value_name='POPULATION')
 
-    return df.query('AGE >= 85')
+    return df
 
 
 def main():
@@ -123,14 +118,7 @@ def main():
     df = df.drop(columns='ASMR_BASE')
     df = df.sort_values(by=['AGE', 'SEX'])
 
-    # con = sqlite3.connect(database=OUTPUT_DB)
-    # df.to_sql(name='cbo_mortality',
-    #           con=con,
-    #           if_exists='replace',
-    #           index=False)
-    # con.close()
-
-    df.to_csv(path_or_buf=os.path.join(os.path.dirname(OUTPUT_DB), 'cbo_mortality_p1v01.csv'),
+    df.to_csv(path_or_buf=os.path.join(PROCESSED_FILES, 'mortality', 'cbo_mortality_p1v01.csv'),
               index=False)
 
 

@@ -1,0 +1,317 @@
+"Notes","Five-Year Age Groups","Five-Year Age Groups Code","HHS Region","HHS Region Code",Deaths,Population,Crude Rate
+,"< 1 year","1","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",1240,349504,354.8
+,"< 1 year","1","HHS Region #2  NJ, NY","HHS2",2777,772467,359.5
+,"< 1 year","1","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",4358,812654,536.3
+,"< 1 year","1","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",10948,1816114,602.8
+,"< 1 year","1","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",7844,1406999,557.5
+,"< 1 year","1","HHS Region #6  AR, LA, NM, OK, TX","HHS6",7299,1316866,554.3
+,"< 1 year","1","HHS Region #7  IA, KS, MO, NE","HHS7",2042,403836,505.7
+,"< 1 year","1","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",1720,362142,475.0
+,"< 1 year","1","HHS Region #9  AZ, CA, HI, NV","HHS9",5384,1378495,390.6
+,"< 1 year","1","HHS Region #10  AK, ID, OR, WA","HHS10",1589,383110,414.8
+"Total","< 1 year","1",,,45201,9002187,502.1
+,"1-4 years","1-4","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",177,1449043,12.2
+,"1-4 years","1-4","HHS Region #2  NJ, NY","HHS2",485,3143232,15.4
+,"1-4 years","1-4","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",752,3381690,22.2
+,"1-4 years","1-4","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",2108,7478711,28.2
+,"1-4 years","1-4","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",1406,5917211,23.8
+,"1-4 years","1-4","HHS Region #6  AR, LA, NM, OK, TX","HHS6",1437,5476095,26.2
+,"1-4 years","1-4","HHS Region #7  IA, KS, MO, NE","HHS7",406,1684184,24.1
+,"1-4 years","1-4","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",286,1490080,19.2
+,"1-4 years","1-4","HHS Region #9  AZ, CA, HI, NV","HHS9",1034,5701040,18.1
+,"1-4 years","1-4","HHS Region #10  AK, ID, OR, WA","HHS10",291,1602143,18.2
+"Total","1-4 years","1-4",,,8382,37323429,22.5
+,"5-9 years","5-9","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",139,1920213,7.2
+,"5-9 years","5-9","HHS Region #2  NJ, NY","HHS2",380,4051897,9.4
+,"5-9 years","5-9","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",465,4426897,10.5
+,"5-9 years","5-9","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",1275,9795426,13.0
+,"5-9 years","5-9","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",865,7810328,11.1
+,"5-9 years","5-9","HHS Region #6  AR, LA, NM, OK, TX","HHS6",840,7284702,11.5
+,"5-9 years","5-9","HHS Region #7  IA, KS, MO, NE","HHS7",255,2213369,11.5
+,"5-9 years","5-9","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",190,1983370,9.6
+,"5-9 years","5-9","HHS Region #9  AZ, CA, HI, NV","HHS9",665,7666992,8.7
+,"5-9 years","5-9","HHS Region #10  AK, ID, OR, WA","HHS10",216,2151573,10.0
+"Total","5-9 years","5-9",,,5290,49304767,10.7
+,"10-14 years","10-14","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",205,2039206,10.1
+,"10-14 years","10-14","HHS Region #2  NJ, NY","HHS2",423,4118720,10.3
+,"10-14 years","10-14","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",562,4559575,12.3
+,"10-14 years","10-14","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",1529,10273097,14.9
+,"10-14 years","10-14","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",1127,8145635,13.8
+,"10-14 years","10-14","HHS Region #6  AR, LA, NM, OK, TX","HHS6",1160,7491745,15.5
+,"10-14 years","10-14","HHS Region #7  IA, KS, MO, NE","HHS7",328,2290289,14.3
+,"10-14 years","10-14","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",337,2066511,16.3
+,"10-14 years","10-14","HHS Region #9  AZ, CA, HI, NV","HHS9",946,7953469,11.9
+,"10-14 years","10-14","HHS Region #10  AK, ID, OR, WA","HHS10",285,2215408,12.9
+"Total","10-14 years","10-14",,,6902,51153655,13.5
+,"15-19 years","15-19","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",474,2389067,19.8
+,"15-19 years","15-19","HHS Region #2  NJ, NY","HHS2",867,4295720,20.2
+,"15-19 years","15-19","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",1393,4829835,28.8
+,"15-19 years","15-19","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",3952,10485841,37.7
+,"15-19 years","15-19","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",2681,8393950,31.9
+,"15-19 years","15-19","HHS Region #6  AR, LA, NM, OK, TX","HHS6",2787,7402011,37.7
+,"15-19 years","15-19","HHS Region #7  IA, KS, MO, NE","HHS7",889,2323952,38.3
+,"15-19 years","15-19","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",817,2077387,39.3
+,"15-19 years","15-19","HHS Region #9  AZ, CA, HI, NV","HHS9",2352,8082252,29.1
+,"15-19 years","15-19","HHS Region #10  AK, ID, OR, WA","HHS10",787,2169564,36.3
+"Total","15-19 years","15-19",,,16999,52449579,32.4
+,"20-24 years","20-24","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",911,2500221,36.4
+,"20-24 years","20-24","HHS Region #2  NJ, NY","HHS2",1706,4515072,37.8
+,"20-24 years","20-24","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",2577,4850997,53.1
+,"20-24 years","20-24","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",7308,10733524,68.1
+,"20-24 years","20-24","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",4809,8581083,56.0
+,"20-24 years","20-24","HHS Region #6  AR, LA, NM, OK, TX","HHS6",4503,7330402,61.4
+,"20-24 years","20-24","HHS Region #7  IA, KS, MO, NE","HHS7",1359,2405421,56.5
+,"20-24 years","20-24","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",1145,2160202,53.0
+,"20-24 years","20-24","HHS Region #9  AZ, CA, HI, NV","HHS9",3930,8178135,48.1
+,"20-24 years","20-24","HHS Region #10  AK, ID, OR, WA","HHS10",1142,2213951,51.6
+"Total","20-24 years","20-24",,,29390,53469008,55.0
+,"25-29 years","25-29","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",1484,2434045,61.0
+,"25-29 years","25-29","HHS Region #2  NJ, NY","HHS2",2835,4913110,57.7
+,"25-29 years","25-29","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",4226,5053893,83.6
+,"25-29 years","25-29","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",10646,11098833,95.9
+,"25-29 years","25-29","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",7004,8568218,81.7
+,"25-29 years","25-29","HHS Region #6  AR, LA, NM, OK, TX","HHS6",6042,7500767,80.6
+,"25-29 years","25-29","HHS Region #7  IA, KS, MO, NE","HHS7",1811,2264595,80.0
+,"25-29 years","25-29","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",1598,2222033,71.9
+,"25-29 years","25-29","HHS Region #9  AZ, CA, HI, NV","HHS9",5612,8995151,62.4
+,"25-29 years","25-29","HHS Region #10  AK, ID, OR, WA","HHS10",1645,2506221,65.6
+"Total","25-29 years","25-29",,,42903,55556866,77.2
+,"30-34 years","30-34","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",2315,2508141,92.3
+,"30-34 years","30-34","HHS Region #2  NJ, NY","HHS2",4143,4987479,83.1
+,"30-34 years","30-34","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",6024,5311579,113.4
+,"30-34 years","30-34","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",15831,11418065,138.6
+,"30-34 years","30-34","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",10092,8593735,117.4
+,"30-34 years","30-34","HHS Region #6  AR, LA, NM, OK, TX","HHS6",8595,7666073,112.1
+,"30-34 years","30-34","HHS Region #7  IA, KS, MO, NE","HHS7",2571,2263617,113.6
+,"30-34 years","30-34","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",2317,2213544,104.7
+,"30-34 years","30-34","HHS Region #9  AZ, CA, HI, NV","HHS9",8027,9265426,86.6
+,"30-34 years","30-34","HHS Region #10  AK, ID, OR, WA","HHS10",2501,2658693,94.1
+"Total","30-34 years","30-34",,,62416,56886352,109.7
+,"35-39 years","35-39","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",3055,2429168,125.8
+,"35-39 years","35-39","HHS Region #2  NJ, NY","HHS2",5263,4739888,111.0
+,"35-39 years","35-39","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",7693,5147713,149.4
+,"35-39 years","35-39","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",20161,10952436,184.1
+,"35-39 years","35-39","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",12761,8404022,151.8
+,"35-39 years","35-39","HHS Region #6  AR, LA, NM, OK, TX","HHS6",11781,7510646,156.9
+,"35-39 years","35-39","HHS Region #7  IA, KS, MO, NE","HHS7",3358,2280631,147.2
+,"35-39 years","35-39","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",2930,2140012,136.9
+,"35-39 years","35-39","HHS Region #9  AZ, CA, HI, NV","HHS9",9953,8722379,114.1
+,"35-39 years","35-39","HHS Region #10  AK, ID, OR, WA","HHS10",3146,2560099,122.9
+"Total","35-39 years","35-39",,,80101,54886994,145.9
+,"40-44 years","40-44","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",3506,2280379,153.7
+,"40-44 years","40-44","HHS Region #2  NJ, NY","HHS2",6544,4506060,145.2
+,"40-44 years","40-44","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",9735,4855254,200.5
+,"40-44 years","40-44","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",26362,10713212,246.1
+,"40-44 years","40-44","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",16161,8092062,199.7
+,"40-44 years","40-44","HHS Region #6  AR, LA, NM, OK, TX","HHS6",15350,7073534,217.0
+,"40-44 years","40-44","HHS Region #7  IA, KS, MO, NE","HHS7",4426,2161522,204.8
+,"40-44 years","40-44","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",3559,2001753,177.8
+,"40-44 years","40-44","HHS Region #9  AZ, CA, HI, NV","HHS9",12818,8173858,156.8
+,"40-44 years","40-44","HHS Region #10  AK, ID, OR, WA","HHS10",3975,2362634,168.2
+"Total","40-44 years","40-44",,,102436,52220268,196.2
+,"45-49 years","45-49","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",4590,2253479,203.7
+,"45-49 years","45-49","HHS Region #2  NJ, NY","HHS2",9138,4407518,207.3
+,"45-49 years","45-49","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",12627,4658896,271.0
+,"45-49 years","45-49","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",35405,10607689,333.8
+,"45-49 years","45-49","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",21438,7746268,276.8
+,"45-49 years","45-49","HHS Region #6  AR, LA, NM, OK, TX","HHS6",20283,6625857,306.1
+,"45-49 years","45-49","HHS Region #7  IA, KS, MO, NE","HHS7",5786,1989265,290.9
+,"45-49 years","45-49","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",4384,1764668,248.4
+,"45-49 years","45-49","HHS Region #9  AZ, CA, HI, NV","HHS9",17440,7836465,222.5
+,"45-49 years","45-49","HHS Region #10  AK, ID, OR, WA","HHS10",4982,2135510,233.3
+"Total","45-49 years","45-49",,,136073,50025615,272.0
+,"50-54 years","50-54","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",7810,2543419,307.1
+,"50-54 years","50-54","HHS Region #2  NJ, NY","HHS2",15134,4790392,315.9
+,"50-54 years","50-54","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",20393,5038356,404.8
+,"50-54 years","50-54","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",52920,11062798,478.4
+,"50-54 years","50-54","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",33373,8222091,405.9
+,"50-54 years","50-54","HHS Region #6  AR, LA, NM, OK, TX","HHS6",29189,6466796,451.4
+,"50-54 years","50-54","HHS Region #7  IA, KS, MO, NE","HHS7",8818,2055165,429.1
+,"50-54 years","50-54","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",6005,1700350,353.2
+,"50-54 years","50-54","HHS Region #9  AZ, CA, HI, NV","HHS9",26013,7929747,328.0
+,"50-54 years","50-54","HHS Region #10  AK, ID, OR, WA","HHS10",7709,2144812,359.4
+"Total","50-54 years","50-54",,,207364,51953926,399.1
+,"55-59 years","55-59","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",12643,2760865,457.9
+,"55-59 years","55-59","HHS Region #2  NJ, NY","HHS2",24602,5061699,486.0
+,"55-59 years","55-59","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",32827,5373540,610.9
+,"55-59 years","55-59","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",82971,11595990,715.5
+,"55-59 years","55-59","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",53960,8805358,612.8
+,"55-59 years","55-59","HHS Region #6  AR, LA, NM, OK, TX","HHS6",44915,6499866,691.0
+,"55-59 years","55-59","HHS Region #7  IA, KS, MO, NE","HHS7",14965,2263002,661.3
+,"55-59 years","55-59","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",9347,1766351,529.2
+,"55-59 years","55-59","HHS Region #9  AZ, CA, HI, NV","HHS9",39538,7960886,496.7
+,"55-59 years","55-59","HHS Region #10  AK, ID, OR, WA","HHS10",12086,2208728,547.2
+"Total","55-59 years","55-59",,,327854,54296285,603.8
+,"60-64 years ","60-64","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",18645,2726431,683.9
+,"60-64 years ","60-64","HHS Region #2  NJ, NY","HHS2",35339,4899513,721.3
+,"60-64 years ","60-64","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",48374,5366639,901.4
+,"60-64 years ","60-64","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",119531,11538737,1035.9
+,"60-64 years ","60-64","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",82214,8994715,914.0
+,"60-64 years ","60-64","HHS Region #6  AR, LA, NM, OK, TX","HHS6",66096,6371049,1037.4
+,"60-64 years ","60-64","HHS Region #7  IA, KS, MO, NE","HHS7",22844,2360121,967.9
+,"60-64 years ","60-64","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",13923,1846442,754.0
+,"60-64 years ","60-64","HHS Region #9  AZ, CA, HI, NV","HHS9",58471,7763237,753.2
+,"60-64 years ","60-64","HHS Region #10  AK, ID, OR, WA","HHS10",18506,2304238,803.1
+"Total","60-64 years ","60-64",,,483943,54171122,893.4
+,"65-69 years","65-69","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",23886,2364454,1010.2
+,"65-69 years","65-69","HHS Region #2  NJ, NY","HHS2",44433,4205633,1056.5
+,"65-69 years","65-69","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",60882,4755726,1280.2
+,"65-69 years","65-69","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",147309,10517217,1400.6
+,"65-69 years","65-69","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",103844,7943762,1307.2
+,"65-69 years","65-69","HHS Region #6  AR, LA, NM, OK, TX","HHS6",81756,5565197,1469.1
+,"65-69 years","65-69","HHS Region #7  IA, KS, MO, NE","HHS7",28448,2093962,1358.6
+,"65-69 years","65-69","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",17703,1657175,1068.3
+,"65-69 years","65-69","HHS Region #9  AZ, CA, HI, NV","HHS9",73387,6902962,1063.1
+,"65-69 years","65-69","HHS Region #10  AK, ID, OR, WA","HHS10",24287,2161552,1123.6
+"Total","65-69 years","65-69",,,605935,48167640,1258.0
+,"70-74 years","70-74","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",31403,1946884,1613.0
+,"70-74 years","70-74","HHS Region #2  NJ, NY","HHS2",57863,3504333,1651.2
+,"70-74 years","70-74","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",77648,3957391,1962.1
+,"70-74 years","70-74","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",185512,9026182,2055.3
+,"70-74 years","70-74","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",131772,6458863,2040.2
+,"70-74 years","70-74","HHS Region #6  AR, LA, NM, OK, TX","HHS6",99287,4514254,2199.4
+,"70-74 years","70-74","HHS Region #7  IA, KS, MO, NE","HHS7",36060,1707074,2112.4
+,"70-74 years","70-74","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",22406,1316085,1702.5
+,"70-74 years","70-74","HHS Region #9  AZ, CA, HI, NV","HHS9",93979,5789527,1623.3
+,"70-74 years","70-74","HHS Region #10  AK, ID, OR, WA","HHS10",31239,1786486,1748.6
+"Total","70-74 years","70-74",,,767169,40007079,1917.6
+,"75-79 years","75-79","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",39854,1390028,2867.1
+,"75-79 years","75-79","HHS Region #2  NJ, NY","HHS2",69936,2565885,2725.6
+,"75-79 years","75-79","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",91416,2827356,3233.3
+,"75-79 years","75-79","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",214997,6531442,3291.7
+,"75-79 years","75-79","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",152621,4530021,3369.1
+,"75-79 years","75-79","HHS Region #6  AR, LA, NM, OK, TX","HHS6",111743,3160123,3536.0
+,"75-79 years","75-79","HHS Region #7  IA, KS, MO, NE","HHS7",41884,1209614,3462.6
+,"75-79 years","75-79","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",26331,884556,2976.7
+,"75-79 years","75-79","HHS Region #9  AZ, CA, HI, NV","HHS9",110434,4139948,2667.5
+,"75-79 years","75-79","HHS Region #10  AK, ID, OR, WA","HHS10",36143,1213409,2978.6
+"Total","75-79 years","75-79",,,895359,28452382,3146.9
+,"80-84 years","80-84","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",46741,916712,5098.8
+,"80-84 years","80-84","HHS Region #2  NJ, NY","HHS2",82586,1772613,4659.0
+,"80-84 years","80-84","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",103865,1884833,5510.6
+,"80-84 years","80-84","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",235338,4234075,5558.2
+,"80-84 years","80-84","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",176117,3073630,5729.9
+,"80-84 years","80-84","HHS Region #6  AR, LA, NM, OK, TX","HHS6",121415,2040749,5949.5
+,"80-84 years","80-84","HHS Region #7  IA, KS, MO, NE","HHS7",48617,836039,5815.2
+,"80-84 years","80-84","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",30683,567279,5408.8
+,"80-84 years","80-84","HHS Region #9  AZ, CA, HI, NV","HHS9",126909,2711129,4681.0
+,"80-84 years","80-84","HHS Region #10  AK, ID, OR, WA","HHS10",39655,739339,5363.6
+"Total","80-84 years","80-84",,,1011926,18776398,5389.4
+,"85-89 years","85-89","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",56275,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #2  NJ, NY","HHS2",98649,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",116208,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",244015,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",196113,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #6  AR, LA, NM, OK, TX","HHS6",126164,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #7  IA, KS, MO, NE","HHS7",55214,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",35191,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #9  AZ, CA, HI, NV","HHS9",140943,Not Applicable,Not Applicable
+,"85-89 years","85-89","HHS Region #10  AK, ID, OR, WA","HHS10",43046,Not Applicable,Not Applicable
+"Total","85-89 years","85-89",,,1111818,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",59023,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #2  NJ, NY","HHS2",98537,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",111153,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",208300,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",186021,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #6  AR, LA, NM, OK, TX","HHS6",104421,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #7  IA, KS, MO, NE","HHS7",51563,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",32026,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #9  AZ, CA, HI, NV","HHS9",133786,Not Applicable,Not Applicable
+,"90-94 years","90-94","HHS Region #10  AK, ID, OR, WA","HHS10",40296,Not Applicable,Not Applicable
+"Total","90-94 years","90-94",,,1025126,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",33794,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #2  NJ, NY","HHS2",56865,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",59924,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",103379,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",99509,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #6  AR, LA, NM, OK, TX","HHS6",50149,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #7  IA, KS, MO, NE","HHS7",27712,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",16480,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #9  AZ, CA, HI, NV","HHS9",76853,Not Applicable,Not Applicable
+,"95-99 years","95-99","HHS Region #10  AK, ID, OR, WA","HHS10",22681,Not Applicable,Not Applicable
+"Total","95-99 years","95-99",,,547346,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",8582,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #2  NJ, NY","HHS2",15413,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",14089,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",24852,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",24171,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #6  AR, LA, NM, OK, TX","HHS6",11315,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #7  IA, KS, MO, NE","HHS7",7123,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",3821,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #9  AZ, CA, HI, NV","HHS9",20459,Not Applicable,Not Applicable
+,"100+ years","100+","HHS Region #10  AK, ID, OR, WA","HHS10",5566,Not Applicable,Not Applicable
+"Total","100+ years","100+",,,135391,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",Suppressed,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #2  NJ, NY","HHS2",25,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",30,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",22,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",10,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #6  AR, LA, NM, OK, TX","HHS6",15,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #7  IA, KS, MO, NE","HHS7",Suppressed,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",Suppressed,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #9  AZ, CA, HI, NV","HHS9",32,Not Applicable,Not Applicable
+,"Not Stated","NS","HHS Region #10  AK, ID, OR, WA","HHS10",Suppressed,Not Applicable,Not Applicable
+"Total","Not Stated","NS",,,145,Not Applicable,Not Applicable
+"Total",,,,,7655469,838488622,913.0
+"---"
+"Dataset: Underlying Cause of Death, 2018-2023, Single Race"
+"Query Parameters:"
+"Sex: Female"
+"Year/Month: 2019; 2020; 2021; 2022; 2023"
+"Group By: Five-Year Age Groups; HHS Region"
+"Show Totals: True"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 100,000"
+"Rate Options: Default intercensal populations for years 2001-2009 (except Infant Age Groups)"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/ucd-expanded.html for more information."
+"---"
+"Query Date: Oct 21, 2025 2:52:19 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files,"
+"2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
+"Program. Accessed at http://wonder.cdc.gov/ucd-icd10-expanded.html on Oct 21, 2025 2:52:19 PM"
+"---"
+Caveats:
+"1. Population and rates are labeled 'Not Applicable' when they include a subset of ages 85-100+ because populations are not"
+"available for those ages. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Ages 85-100."
+"2. Data are Suppressed when the data meet the criteria for confidentiality constraints. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Assurance of Confidentiality."
+"3. Death rates are flagged as Unreliable when the rate is calculated with a numerator of 20 or less. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Unreliable."
+"4. Deaths of persons with Age ""Not Stated"" are included in ""All"" counts and rates, but are not distributed among age groups,"
+"so are not included in age-specific counts, age-specific rates or in any age-adjusted rates. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Not Stated."
+"5. The population figures for years 2023 are single-race estimates of the July 1 resident population, from the Vintage 2023"
+"postcensal series released by the Census Bureau on June 27, 2024. The 2023 series is based on the Modified Blended Base produced"
+"by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The Modified Blended Base consists of the blend"
+"of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic Analysis Estimates, and 2020 Census data"
+"from the internal Census Edited File (CEF). The population figures for years 2022 are single-race estimates of the July 1"
+"resident population, from the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023. The 2022 series is"
+"based on the Modified Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The"
+"Modified Blended Base consists of the blend of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic"
+"Analysis Estimates, and 2020 Census data from the internal Census Edited File (CEF). The population figures for years 2021 are"
+"single-race estimates of the July 1 resident population, based on the Blended Base produced by the US Census Bureau in lieu of"
+"the April 1, 2020 decennial population count, from the Vintage 2021 postcensal series released by the Census Bureau on June 30,"
+"2022. The population figures for year 2020 are single-race estimates of the July 1 resident population, from the Vintage 2020"
+"postcensal series based on April 2010 Census, released by the Census Bureau on July 27, 2021. The population figures for year"
+"2019 are single-race estimates of the July 1 resident population, from the Vintage 2019 postcensal series based on April 2010"
+"Census, released by the Census Bureau on June 25, 2020. The population figures for year 2018 are single-race estimates of the"
+"July 1 resident population, from the Vintage 2018 postcensal series based on April 2010 Census, released by the Census Bureau on"
+"June 20, 2019. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Population Data."
+"6. The population figures used in the calculation of death rates for the age group 'under 1 year' are the estimates of the"
+"resident population that is under one year of age. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Age"
+"Group."
+"7. Connecticut population estimates for 2022 and later years are reported for 9 planning regions as county equivalent areas,"
+"instead of the former 8 legacy counties in the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023,"
+"and in the Vintage 2023 postcensal series released by the Census Bureau on June 27, 2024. Populations estimates for the former"
+"counties are not available for 2022 and later years. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Connecticut-2022."
+"8. After the creation of the final 2023 dataset, North Carolina updated the cause of death information for over 900 death"
+"certificates to include a cause of death code indicating drug overdose (ICD-10 underlying cause-of-death codes: X40-X44,"
+"X60-X64, X85, and Y10-Y14). Jurisdictions can continue to update death certificates after the closing of the mortality file. As"
+"a result, users should consider that the actual death count for drug overdose deaths for North Carolina in 2023 is over 4,400"
+"deaths, with a crude rate of approximately 41.0 per 100,000 population, and an age-adjusted rate of approximately 42.1 per"
+"100,000 population. These deaths will not be updated on the final mortality datasets."

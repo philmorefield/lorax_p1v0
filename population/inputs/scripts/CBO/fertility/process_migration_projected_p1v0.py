@@ -25,7 +25,7 @@ def main():
     df = df.drop('STATUS')
 
     # Clean AGE column: remove '+' and replace '-1' with '0', then convert to int
-    df = df.with_columns([pl.col('AGE').str.replace('+', '').str.replace('-1', '0').cast(pl.Int32),
+    df = df.with_columns([pl.col('AGE').str.replace(pattern='+', value='', literal=True).str.replace(pattern='-1', value='0',).cast(pl.Int32),
                           pl.col('SEX').str.to_uppercase(),
                           pl.col('TYPE').str.to_uppercase(),
                           pl.col('FLOW').cast(pl.Int32)])
