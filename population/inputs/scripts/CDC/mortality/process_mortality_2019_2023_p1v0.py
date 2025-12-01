@@ -1,6 +1,5 @@
 import glob
 import os
-import sqlite3
 
 from itertools import product
 
@@ -202,16 +201,6 @@ def combine_under_5_age_groups(df):
     return df
 
 
-def convert_age_group_to_list(s):
-    if s == '85+':
-        result = [85] # highest age group is 85+
-    else:
-        s = s.split('-')
-        result = list(range(int(s[0]), int(s[1]) + 1))
-
-    return result
-
-
 def main():
     # create the template Dataframe that hold all county/race/age combinations
     # and start merging information
@@ -222,12 +211,13 @@ def main():
     assert df.MORTALITY.isnull().sum() == 0, "Some mortality rates are still null!"
 
     df = combine_under_5_age_groups(df)
+    df = df.reset_index().groupby(by=['STFIPS', 'AGE_GROUP', 'SEX'], as_index=False).mean()
 
     df = df.sort_values(by=['AGE_GROUP', 'STFIPS'], key=lambda x: x.map(AGE_GROUP_SORT_MAP))
     df = df.rename(columns={'MORTALITY': 'MORTALITY_RATE_100K',
                             'STFIPS': 'GEOID'})
 
-    df.to_csv(os.path.join(PROCESSED_FILES, 'mortality', 'mortality_2019_2023_county.csv'), index=False)
+    df.to_csv(os.path.join(PROCESSED_FILES, 'mortality', 'cdc_mortality_2019_2023_p1v0.csv'), index=False)
 
     print("Finished!")
 

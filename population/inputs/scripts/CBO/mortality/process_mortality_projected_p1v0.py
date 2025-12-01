@@ -6,11 +6,11 @@ import pandas as pd
 BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
 if os.path.isdir('C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'):
     BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'
-
+PROCESSED_FILES = os.path.join(BASE_FOLDER, 'inputs\\processed_files')
 CBO_FOLDER = os.path.join(BASE_FOLDER, 'inputs\\raw_files\\CBO')
 CSV_FOLDER = '57059-2025-09-Demographic-Projections\\CSV files'
 CSV_FILE = 'mortalityRates_byYearAgeSex.csv'
-PROCESSED_FILES = os.path.join(BASE_FOLDER, 'inputs\\processed_files')
+
 
 def get_cbo_population():
     cols = ['AGE',
@@ -50,6 +50,28 @@ def get_cbo_population():
 
     df = pd.concat(df_list, ignore_index=True)
     df = df.melt(id_vars=['YEAR', 'AGE'], var_name='SEX', value_name='POPULATION')
+
+    return df
+
+def add_age_group(df):
+    df['AGE_GROUP'] = '85+'
+    df.loc[df.AGE <= 84, 'AGE_GROUP'] = '80-84'
+    df.loc[df.AGE <= 79, 'AGE_GROUP'] = '75-79'
+    df.loc[df.AGE <= 74, 'AGE_GROUP'] = '70-74'
+    df.loc[df.AGE <= 69, 'AGE_GROUP'] = '65-69'
+    df.loc[df.AGE <= 64, 'AGE_GROUP'] = '60-64'
+    df.loc[df.AGE <= 59, 'AGE_GROUP'] = '55-59'
+    df.loc[df.AGE <= 54, 'AGE_GROUP'] = '50-54'
+    df.loc[df.AGE <= 49, 'AGE_GROUP'] = '45-49'
+    df.loc[df.AGE <= 44, 'AGE_GROUP'] = '40-44'
+    df.loc[df.AGE <= 39, 'AGE_GROUP'] = '35-39'
+    df.loc[df.AGE <= 34, 'AGE_GROUP'] = '30-34'
+    df.loc[df.AGE <= 29, 'AGE_GROUP'] = '25-29'
+    df.loc[df.AGE <= 24, 'AGE_GROUP'] = '20-24'
+    df.loc[df.AGE <= 19, 'AGE_GROUP'] = '15-19'
+    df.loc[df.AGE <= 14, 'AGE_GROUP'] = '10-14'
+    df.loc[df.AGE <= 9, 'AGE_GROUP'] = '5-9'
+    df.loc[df.AGE <= 4, 'AGE_GROUP'] = '0-4'
 
     return df
 
@@ -112,13 +134,34 @@ def main():
     df.loc[df.AGE >= 85, 'AGE'] = 85
     df = df.groupby(by=['AGE', 'SEX'], as_index=False).mean()
 
-    # calculate future ASMR as a ratio of the base year ASMR
+    # calculated population-weighted ASMR for each age group
+    age_group_pop = add_age_group(sya_pop)
+    for year in range(2025, 2099):
+        df = df.merge(right=age_group_pop.query(f'YEAR == {year}'),
+                      how='left')
+        df[f'WEIGHTS_X_POP_{year}'] = (df[f'ASMR_{year}'] * df['POPULATION'])
+        df['SUM_WEIGHTS_X_POP'] = df.groupby(by=['AGE_GROUP', 'SEX']) [f'WEIGHTS_X_POP_{year}'].transform('sum')
+        df['SUM_POP'] = df.groupby(by=['AGE_GROUP', 'SEX'])['POPULATION'].transform('sum')
+        df[f'ASMR_{year}'] = df.eval('SUM_WEIGHTS_X_POP / SUM_POP')
+        df = df.drop(columns=['YEAR', f'WEIGHTS_X_POP_{year}', 'SUM_WEIGHTS_X_POP', 'SUM_POP', 'POPULATION'])
+
+        if year == 2025:
+            df = df.merge(right=age_group_pop.query(f'YEAR == {year}'),
+                          how='left')
+            df['WEIGHTS_X_POP_BASE'] = (df['ASMR_BASE'] * df['POPULATION'])
+            df['SUM_WEIGHTS_X_POP'] = df.groupby(by=['AGE_GROUP', 'SEX']) ['WEIGHTS_X_POP_BASE'].transform('sum')
+            df['SUM_POP'] = df.groupby(by=['AGE_GROUP', 'SEX'])['POPULATION'].transform('sum')
+            df['ASMR_BASE'] = df.eval('SUM_WEIGHTS_X_POP / SUM_POP')
+            df = df.drop(columns=['YEAR', 'WEIGHTS_X_POP_BASE', 'SUM_WEIGHTS_X_POP', 'SUM_POP', 'POPULATION'])
+    df = df.drop(columns='AGE').groupby(by=['AGE_GROUP', 'SEX'], as_index=False).mean()
+
+    # calculate ASMR as a ratio of the base year ASMR
     for year in range(2025, 2099):
         df[f'ASMR_{year}'] = df[f'ASMR_{year}'] / df['ASMR_BASE']
     df = df.drop(columns='ASMR_BASE')
-    df = df.sort_values(by=['AGE', 'SEX'])
+    df = df.set_index(['AGE_GROUP', 'SEX']).reset_index()
 
-    df.to_csv(path_or_buf=os.path.join(PROCESSED_FILES, 'mortality', 'cbo_mortality_p1v01.csv'),
+    df.to_csv(path_or_buf=os.path.join(PROCESSED_FILES, 'mortality', 'cbo_mortality_p1v0.csv'),
               index=False)
 
 

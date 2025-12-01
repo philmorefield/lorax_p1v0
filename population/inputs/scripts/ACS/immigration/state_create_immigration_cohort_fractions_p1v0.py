@@ -13,6 +13,29 @@ PROCESSED_FILES = os.path.join(BASE_FOLDER, 'inputs\\processed_files')
 FIGURES = os.path.join(BASE_FOLDER, 'figures', 'p1v0', 'immigration', 'state_fractions')
 GEOSPATIAL = 'D:\\OneDrive\\lorax_p1v0\\geospatial'
 
+def add_age_group(df):
+    df = df.with_columns(pl.when(pl.col('AGE') <= 4).then(pl.lit('0-4'))
+                           .when(pl.col('AGE') <= 9).then(pl.lit('5-9'))
+                           .when(pl.col('AGE') <= 14).then(pl.lit('10-14'))
+                           .when(pl.col('AGE') <= 19).then(pl.lit('15-19'))
+                           .when(pl.col('AGE') <= 24).then(pl.lit('20-24'))
+                           .when(pl.col('AGE') <= 29).then(pl.lit('25-29'))
+                           .when(pl.col('AGE') <= 34).then(pl.lit('30-34'))
+                           .when(pl.col('AGE') <= 39).then(pl.lit('35-39'))
+                           .when(pl.col('AGE') <= 44).then(pl.lit('40-44'))
+                           .when(pl.col('AGE') <= 49).then(pl.lit('45-49'))
+                           .when(pl.col('AGE') <= 54).then(pl.lit('50-54'))
+                           .when(pl.col('AGE') <= 59).then(pl.lit('55-59'))
+                           .when(pl.col('AGE') <= 64).then(pl.lit('60-64'))
+                           .when(pl.col('AGE') <= 69).then(pl.lit('65-69'))
+                           .when(pl.col('AGE') <= 74).then(pl.lit('70-74'))
+                           .when(pl.col('AGE') <= 79).then(pl.lit('75-79'))
+                           .when(pl.col('AGE') <= 84).then(pl.lit('80-84'))
+                           .otherwise(pl.lit('85+'))
+                           .alias('AGE_GROUP'))
+
+    return df
+
 
 def retrieve_sex_weights():
     print("Processing sex weights...")
@@ -59,9 +82,9 @@ def create_maps(df):
     gdf['STFIPS'] = gdf['STFIPS'].astype(str).str.zfill(2)
     df_pandas['PERCENT_OF_AGE_SEX_COHORT'] = round(df_pandas['PERCENT_OF_AGE_SEX_COHORT'] * 1000, 1)
 
-    for age in df_pandas['AGE'].unique():
+    for age_group in df_pandas['AGE_GROUP'].unique():
         for sex in df_pandas['SEX'].unique():
-            cohort = df_pandas.query('AGE == @age & SEX == @sex')
+            cohort = df_pandas.query('AGE_GROUP == @age_group & SEX == @sex')
             temp = gdf.merge(right=cohort, how='right', left_on='STFIPS', right_on='GEOID')
 
             temp.plot(column='PERCENT_OF_AGE_SEX_COHORT',
@@ -77,7 +100,7 @@ def create_maps(df):
             plt.gca().set_xlim(-2371000, 2278000)
             plt.gca().set_ylim(246000, 3186000)
             plt.gca().axis('off')
-            plt.title(label=f"2011-2015 immigration fractions:\n {sex}, {age}")
+            plt.title(label=f"2011-2015 immigration fractions:\n {sex}, {age_group}")
             plt.tight_layout()
 
             # simplify the legend labels
@@ -89,7 +112,7 @@ def create_maps(df):
                 pass
 
             # plt.show()
-            fn = f'state_immigration_fractions_{sex}_{age}.png'
+            fn = f'state_immigration_fractions_{sex}_{age_group}.png'
             plt.savefig(os.path.join(FIGURES, fn), dpi=300)
             plt.clf()
             plt.close()
@@ -118,7 +141,14 @@ def create_and_save_dataframe():
     df = df.with_columns([pl.col('DESTINATION_FIPS').alias('GEOID')]).select(['GEOID', 'AGE', 'SEX', 'PERCENT_OF_AGE_SEX_COHORT'])
 
     # Format GEOID as 2-digit string for states
-    df = df.with_columns([pl.col('GEOID').cast(pl.Utf8).str.zfill(2)])
+    df = df.with_columns([pl.col('GEOID').cast(pl.String).str.zfill(2)])
+
+    # Add AGE_GROUP column and aggregate to that level
+    df = add_age_group(df).drop('AGE').group_by(['GEOID', 'AGE_GROUP', 'SEX']).agg(pl.col('PERCENT_OF_AGE_SEX_COHORT').sum().alias('PERCENT_OF_AGE_SEX_COHORT'))
+
+    # Recalculate percentages to ensure they sum to 1 within each age-sex cohort
+    df = df.with_columns([pl.col('PERCENT_OF_AGE_SEX_COHORT').sum().over(['AGE_GROUP', 'SEX']).alias('TOTAL_PERCENT')])
+    df = df.with_columns([(pl.col('PERCENT_OF_AGE_SEX_COHORT') / pl.col('TOTAL_PERCENT')).alias('PERCENT_OF_AGE_SEX_COHORT')]).drop('TOTAL_PERCENT')
 
     # Write to CSV
     df.write_csv(os.path.join(PROCESSED_FILES, 'immigration', 'state_acs_immigration_age_sex_fractions_2011_2015.csv'))

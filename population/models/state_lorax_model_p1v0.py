@@ -106,7 +106,7 @@ def get_cbo_population():
     df = df.unpivot(index='AGE', variable_name='SEX', value_name='POPULATION_CBO')
 
     # Convert ages to age groups
-    df = df.with_columns(pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP'))
+    df = df.with_columns(pl.col('AGE').map_elements(age_to_age_group).alias('AGE_GROUP'))
     df = df.group_by(['AGE_GROUP', 'SEX']).agg(pl.col('POPULATION_CBO').sum())
 
     assert df.shape == (36, 3)
@@ -126,12 +126,10 @@ def set_launch_population():
         if csv.endswith('.csv'):
             temp = pl.read_csv(source=os.path.join(census_sya_input_folder, csv),
                                   encoding='latin1').filter(pl.col('YEAR') == 6)
-            temp = temp.with_columns((pl.col('STATE').cast(pl.Utf8).str.zfill(2) +
-                        pl.col('COUNTY').cast(pl.Utf8).str.zfill(3))
-                        .alias('GEOID')).rename({'TOT_MALE': 'MALE', 'TOT_FEMALE': 'FEMALE'})
+            temp = temp.with_columns((pl.col('STATE').cast(pl.String).str.zfill(2)).alias('GEOID')).rename({'TOT_MALE': 'MALE', 'TOT_FEMALE': 'FEMALE'})
             temp = temp.select(['GEOID', 'AGE', 'MALE', 'FEMALE'])
             # Convert ages to age groups
-            temp = temp.with_columns(pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP'))
+            temp = temp.with_columns(pl.col('AGE').map_elements(age_to_age_group).alias('AGE_GROUP')).drop('AGE')
             temp = temp.unpivot(index=['GEOID', 'AGE_GROUP'], variable_name='SEX', value_name='POPULATION')
             # Aggregate by age groups
             temp = temp.group_by(['GEOID', 'AGE_GROUP', 'SEX']).agg(pl.col('POPULATION').sum())
@@ -405,29 +403,21 @@ class Projector():
         print("Calculating mortality...", end='')
 
         # Read single-year mortality rates and convert to age groups
-        mort_rates = os.path.join(PROCESSED_FILES, 'mortality', 'mortality_2019_2023_county.csv')
-        county_mort_rates = (pl.read_csv(source=mort_rates)
-                             .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(5).alias('GEOID')))
+        mort_rates = os.path.join(PROCESSED_FILES, 'mortality', 'cdc_mortality_2019_2023_p1v0.csv')
+        state_mort_rates = (pl.read_csv(source=mort_rates)
+                             .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2).alias('GEOID')))
 
         df = self.current_pop.clone()
-        df = df.join(other=county_mort_rates,
+        df = df.join(other=state_mort_rates,
                         on=['GEOID', 'AGE_GROUP', 'SEX'],
                         how='left',
                         coalesce=True)
 
-        # Read CBO mortality adjustments - need to aggregate single-year to age groups
+        # Read CBO mortality adjustments
         cbo_mort_csv = os.path.join(PROCESSED_FILES, 'mortality', 'cbo_mortality_p1v0.csv')
-        cbo_mort_multiply = pl.read_csv(source=cbo_mort_csv).with_columns(pl.col('AGE'))
-        cbo_mort_multiply = cbo_mort_multiply.select(['AGE', 'SEX', f'ASMR_{self.current_projection_year}'])
-        cbo_mort_multiply = cbo_mort_multiply.rename({f'ASMR_{self.current_projection_year}': 'MORT_MULTIPLY'})
-
-        # Convert ages to age groups and aggregate
-        cbo_mort_multiply = cbo_mort_multiply.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-        cbo_mort_multiply = cbo_mort_multiply.group_by(['AGE_GROUP', 'SEX']).agg(
-            pl.col('MORT_MULTIPLY').mean()
-        )
+        cbo_mort_multiply = (pl.read_csv(source=cbo_mort_csv)
+                               .select(['AGE_GROUP', 'SEX', f'ASMR_{self.current_projection_year}'])
+                               .rename({f'ASMR_{self.current_projection_year}': 'MORT_MULTIPLY'}))
 
         # join CBO mortality rate adjustments
         df = df.join(other=cbo_mort_multiply,
@@ -449,17 +439,13 @@ class Projector():
         if self.current_projection_year == self.launch_year + 5:
             deaths = self.deaths.rename({'DEATHS': str(self.current_projection_year)})
         else:
-            query = f'SELECT * FROM deaths_by_age_group_sex_{self.scenario}'
-            deaths = pl.read_database_uri(query=query, uri=OUTPUT_DATABASE_URI)
+            deaths = pl.read_csv(os.path.join(OUTPUT_FOLDER, f'deaths_by_age_group_sex_{self.scenario}.csv'))
             current_deaths = self.deaths.clone()
             current_deaths = current_deaths.rename({'DEATHS': str(self.current_projection_year)})
             deaths = pl.concat(items=[deaths, current_deaths], how='align')
         deaths.sort(by=['GEOID', 'SEX', 'AGE_GROUP'])
 
-        deaths.write_database(table_name=f'deaths_by_age_group_sex_{self.scenario}',
-                              connection=OUTPUT_DATABASE_URI,
-                              if_table_exists='replace',
-                              engine='adbc')
+        deaths.write_csv(os.path.join(OUTPUT_FOLDER, f'deaths_by_age_group_sex_{self.scenario}.csv'))
 
         print(f"finished! ({total_deaths_this_year:,} deaths this period)")
 
@@ -469,32 +455,17 @@ class Projector():
         '''
         print("Calculating net immigration...", end='')
         # get the County level age-sex proportions
-        county_weights_csv = os.path.join(DATABASE_FOLDER, 'acs_immigration_age_sex_fractions_2011_2015.csv')
+        county_weights_csv = os.path.join(PROCESSED_FILES, 'immigration', 'state_acs_immigration_age_sex_fractions_2011_2015.csv')
         county_weights = pl.read_csv(source=county_weights_csv)
-        county_weights = county_weights.with_columns(pl.col('GEOID').cast(pl.String).str.zfill(5).alias('GEOID'))
-
-        # Convert ages to age groups
-        county_weights = county_weights.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-        # Aggregate by age groups
-        county_weights = county_weights.group_by(['GEOID', 'AGE_GROUP', 'SEX']).agg(
-            pl.col('PERCENT_OF_AGE_SEX_COHORT').sum()
-        )
+        county_weights = county_weights.with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2).alias('GEOID'))
 
         # this is the net migrants for each age-sex combination
-        df_cbo = pl.read_csv(source=os.path.join(DATABASE_FOLDER, 'cbo_national_net_migration_by_year_age_sex.csv'))
-        df_cbo = (df_cbo.filter(pl.col('YEAR') == self.current_projection_year)
-                        .select(['AGE', 'SEX', 'NET_IMMIGRATION'])
-                        .with_columns(pl.col('AGE').cast(pl.Int32)))
+        time_step = f'{self.current_projection_year - 4}-{self.current_projection_year}'
+        df_cbo = pl.read_csv(source=os.path.join(PROCESSED_FILES, 'immigration', 'national_cbo_net_migration_by_year_age_sex.csv'))
+        df_cbo = (df_cbo.filter(pl.col('TIME_STEP') == time_step)
+                        .select(['AGE_GROUP', 'SEX', 'NET_IMMIGRATION']))
 
-        # Convert ages to age groups and aggregate immigration
-        df_cbo = df_cbo.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-        df_cbo = df_cbo.group_by(['AGE_GROUP', 'SEX']).agg(
-            pl.col('NET_IMMIGRATION').sum() * 5.0  # Multiply by 5 for 5-year period
-        )
+        df_cbo = df_cbo.group_by(['AGE_GROUP', 'SEX']).agg(pl.col('NET_IMMIGRATION').sum())
 
         df = (county_weights.join(other=df_cbo,
                                   on=['AGE_GROUP', 'SEX'],
@@ -510,16 +481,12 @@ class Projector():
         if self.current_projection_year == self.launch_year + 5:
             immigration = self.immigrants.rename({'NET_IMMIGRATION': str(self.current_projection_year)}).clone()
         else:
-            query = f'SELECT * FROM immigration_by_age_group_sex_{self.scenario}'
-            immigration = pl.read_database_uri(query=query, uri=OUTPUT_DATABASE_URI)
+            immigration = pl.read_csv(os.path.join(OUTPUT_FOLDER, f'immigration_by_age_group_sex_{self.scenario}'))
             current_immigration = self.immigrants.clone()
             current_immigration = current_immigration.rename({'NET_IMMIGRATION': str(self.current_projection_year)}).clone()
             immigration = pl.concat(items=[immigration, current_immigration], how='align')
 
-        immigration.write_database(table_name=f'immigration_by_age_group_sex_{self.scenario}',
-                                   connection=OUTPUT_DATABASE_URI,
-                                   if_table_exists='replace',
-                                   engine='adbc')
+        immigration.write_csv(file=os.path.join(OUTPUT_FOLDER, f'immigration_by_age_group_sex_{self.scenario}'))
 
         total_immigrants_this_year = round(immigration.select(f'{self.current_projection_year}').sum().item())
         print(f"finished! ({total_immigrants_this_year:,} net immigrants this period)")
@@ -531,25 +498,12 @@ class Projector():
         print("Calculating domestic migration...")
 
         # get the age-sex migration rates specific to each ORIGIN-DESTINATION
-        rates = pl.read_csv(os.path.join(DATABASE_FOLDER, 'acs_gross_migration_age_sex_fractions_2011_2015.csv'))
-        rates = rates.with_columns([pl.col('ORIGIN_FIPS').cast(pl.String).str.zfill(5).alias('ORIGIN_FIPS'),
-                                   pl.col('DESTINATION_FIPS').cast(pl.String).str.zfill(5).alias('DESTINATION_FIPS')])
+        rates = pl.read_csv(os.path.join(PROCESSED_FILES, 'migration', 'state_acs_gross_migration_age_sex_fractions_2011_2015.csv'))
+        rates = rates.with_columns([pl.col('ORIGIN_FIPS').cast(pl.String).str.zfill(2).alias('ORIGIN_FIPS'),
+                                   pl.col('DESTINATION_FIPS').cast(pl.String).str.zfill(2).alias('DESTINATION_FIPS')])
 
-        # Convert single ages to age groups
-        rates = rates.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-        # Aggregate migration rates by age group
-        rates = rates.group_by(['ORIGIN_FIPS', 'DESTINATION_FIPS', 'AGE_GROUP', 'SEX']).agg(
-            pl.col('MIGRATION_RATE').sum() * 5.0  # Multiply by 5 for 5-year period
-        )
+        assert set(rates['AGE_GROUP'].unique()) == set(self.current_pop['AGE_GROUP'].unique())
 
-        # we have migration rates to/from Puerto Rico, but not currently
-        # modeling migration involving PR
-        rates = rates.filter(~pl.col('ORIGIN_FIPS').str.starts_with('7'))
-        rates = rates.filter(~pl.col('DESTINATION_FIPS').str.starts_with('7'))
-
-        # compute all county to county migration flows
         # join current population with migration rates ORIGIN_FIPS
         migr = rates.join(other=self.current_pop.clone(),
                           left_on=['ORIGIN_FIPS', 'AGE_GROUP', 'SEX'],
@@ -557,8 +511,8 @@ class Projector():
                           how='left',
                           coalesce=True).rename({'POPULATION': 'ORIGIN_POPULATION'})
 
-        # calculate net migration flows
-        migr = migr.with_columns((pl.col('MIGRATION_RATE') * pl.col('ORIGIN_POPULATION')).alias('FLOW'))
+        # calculate net migration flows and multiply by 5 for five-year time step
+        migr = migr.with_columns((pl.col('MIGRATION_RATE') * pl.col('ORIGIN_POPULATION') * 5).alias('FLOW'))
         inflows = (migr.with_columns(pl.col('FLOW').sum().over(['DESTINATION_FIPS', 'AGE_GROUP', 'SEX'])
                                            .alias('INFLOWS'))
                                            .select(['DESTINATION_FIPS', 'AGE_GROUP', 'SEX', 'INFLOWS'])
@@ -585,8 +539,7 @@ class Projector():
                                                     'INFLOWS': f'INMIG{self.current_projection_year}',
                                                     'OUTFLOWS': f'OUTMIG{self.current_projection_year}'}).clone()
         else:
-            query = f'SELECT * FROM migration_by_age_group_sex_{self.scenario}'
-            migration = pl.read_database_uri(query=query, uri=OUTPUT_DATABASE_URI)
+            migration = pl.read_csv(os.path.join(OUTPUT_FOLDER, 'migration_by_age_group_sex_{self.scenario}'))
             current_migration = self.net_migration.clone().rename({'NET_MIGRATION': f'NETMIG{self.current_projection_year}',
                                                                    'INFLOWS': f'INMIG{self.current_projection_year}',
                                                                    'OUTFLOWS': f'OUTMIG{self.current_projection_year}'})
@@ -596,10 +549,7 @@ class Projector():
                                        coalesce=True).sort(by=['GEOID', 'AGE_GROUP', 'SEX'])
 
         self.net_migration = self.net_migration.drop(['INFLOWS', 'OUTFLOWS'])
-        migration.write_database(table_name=f'migration_by_age_group_sex_{self.scenario}',
-                                 connection=OUTPUT_DATABASE_URI,
-                                 if_table_exists='replace',
-                                 engine='adbc')
+        migration.write_csv(os.path.join(OUTPUT_FOLDER, f'migration_by_age_group_sex_{self.scenario}'))
 
         pct_migration = round(((total_migrants_this_year / self.current_pop.select('POPULATION').sum().item())) * 100.0, 1)
         print(f"...finished! ({total_migrants_this_year:,} total migrants this period; {pct_migration}% of the current population)")
@@ -615,24 +565,14 @@ class Projector():
         fertile_age_groups = ['15-19', '20-24', '25-29', '30-34', '35-39', '40-44']
 
         # get CDC fertility rates by AGE and COUNTY, aggregate to age groups
-        county_fert_rates = (pl.read_csv(source=os.path.join(DATABASE_FOLDER, 'fertility_2020_2024_county.csv'))
-                                         .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(5).alias('GEOID')))
+        county_fert_rates = (pl.read_csv(source=os.path.join(PROCESSED_FILES, 'fertility', 'state_cdc_fertility_2020_2024.csv'))
+                                         .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2).alias('GEOID')))
 
-        # Convert ages to age groups and aggregate fertility rates
-        county_fert_rates = county_fert_rates.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-        # Average fertility rates within each age group
-        county_fert_rates = county_fert_rates.group_by(['GEOID', 'AGE_GROUP']).agg(
-            pl.col('FERTILITY').mean()
-        )
-        # Filter to fertile age groups only
-        county_fert_rates = county_fert_rates.filter(pl.col('AGE_GROUP').is_in(fertile_age_groups))
 
         df = self.current_pop.filter((pl.col('SEX') == 'FEMALE') & (pl.col('AGE_GROUP').is_in(fertile_age_groups)))
 
         # get CBO fertility rate adjustments - aggregate single year to age groups
-        fert_multiply = (pl.read_csv(source=os.path.join(DATABASE_FOLDER, 'cbo_fertility_p1v0.csv'))
+        fert_multiply = (pl.read_csv(source=os.path.join(PROCESSED_FILES, 'fertility', 'cbo_fertility_p1v0.csv'))
                          .select(['AGE', f'ASFR_{self.current_projection_year}'])
                          .rename({f'ASFR_{self.current_projection_year}': 'FERT_MULT'}))
 
