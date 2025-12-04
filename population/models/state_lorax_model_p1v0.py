@@ -21,6 +21,9 @@ CENSUS_CSV_FOLDER = os.path.join(INPUT_FOLDER, 'raw_files', 'Census')
 PROCESSED_FILES = os.path.join(INPUT_FOLDER, 'processed_files')
 OUTPUT_FOLDER = os.path.join(BASE_FOLDER, 'outputs')
 
+FERT_MULT_PARAM = 1.0  # fertility multiplier parameter
+MORT_MULT_PARAM = 1.21 # mortality multiplier parameter
+
 
 # Define five-year age groups
 AGE_GROUPS = ['0-4', '5-9', '10-14', '15-19', '20-24', '25-29', '30-34',
@@ -165,14 +168,12 @@ def set_launch_population():
     return df
 
 
-def main(scenario, version, fert_calibr_pct, mort_calibr_pct):
+def main(scenario, version):
     '''
     TODO: Add docstring
     '''
     model = Projector(scenario=scenario,
-                      version=version,
-                      fert_calibr=fert_calibr_pct,
-                      mort_calibr=mort_calibr_pct)
+                      version=version)
     model.run()
 
 
@@ -180,7 +181,7 @@ class Projector():
     '''
     TODO: Add docstring
     '''
-    def __init__(self, scenario, version, fert_calibr, mort_calibr):
+    def __init__(self, scenario, version):
 
         # time-related attributes
         self.launch_year = 2024
@@ -199,14 +200,12 @@ class Projector():
 
         # mortality-related attributes
         self.deaths = None
-        self.mort_calibr = mort_calibr
 
         # migration-related attributes
         self.net_migration = None
 
         # fertility-related attributes
         self.births = None
-        self.fert_calibr_pct = fert_calibr
 
 
     def run(self, final_projection_year=2098):
@@ -307,14 +306,14 @@ class Projector():
 
             # add cumulative remainders from previous time steps (or from
             # setting up launch population if this is the first time step)
-            # if self.current_projection_year > self.launch_year + 5:
-            query = f'SELECT * FROM population_by_age_group_sex_{self.scenario}_r'
-            remainders = pl.read_database_uri(query=query, uri=OUTPUT_DATABASE_URI)
-            self.current_pop = (self.current_pop.join(other=remainders,
+            if self.current_projection_year > self.launch_year + 5:
+                remainders = (pl.read_csv(os.path.join(OUTPUT_FOLDER, f'population_by_age_group_sex_{self.scenario}_r'))
+                              .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2)))
+                self.current_pop = (self.current_pop.join(other=remainders,
                                                         on=['GEOID', 'AGE_GROUP', 'SEX'],
                                                         how='left',
                                                         coalesce=True))
-            self.current_pop = self.current_pop.with_columns(pl.when(pl.col('POPULATION_REMAINDER').is_not_null())
+                self.current_pop = self.current_pop.with_columns(pl.when(pl.col('POPULATION_REMAINDER').is_not_null())
                                                                 .then(pl.col('POPULATION') + pl.col('POPULATION_REMAINDER'))
                                                                 .otherwise(pl.col('POPULATION'))
                                                                 .alias('POPULATION'))
@@ -326,10 +325,7 @@ class Projector():
             self.current_pop = self.current_pop.with_columns(pl.col('POPULATION').round().alias('POPULATION'))
             self.current_pop = self.current_pop.select(['GEOID', 'AGE_GROUP', 'SEX', 'POPULATION'])
 
-            population_r.write_database(table_name=f'population_by_age_group_sex_{self.scenario}_r',
-                                        connection=OUTPUT_DATABASE_URI,
-                                        if_table_exists='replace',
-                                        engine='adbc')
+            population_r.write_csv(os.path.join(OUTPUT_FOLDER, f'population_by_age_group_sex_{self.scenario}_r.csv'))
 
             if self.population_time_series is None:
                 self.population_time_series = self.current_pop.clone()
@@ -343,10 +339,8 @@ class Projector():
             # save results to sqlite3 database
             temp = self.population_time_series.clone()
             temp = temp.sort(by=['GEOID', 'SEX', 'AGE_GROUP'])
-            temp.write_database(table_name=f'population_by_age_group_sex_{self.scenario}',
-                                connection=OUTPUT_DATABASE_URI,
-                                if_table_exists='replace',
-                                engine='adbc')
+            temp.write_csv(os.path.join(OUTPUT_FOLDER, f'population_by_age_group_sex_{self.scenario}.csv'))
+
             del temp
 
 
@@ -403,7 +397,7 @@ class Projector():
         print("Calculating mortality...", end='')
 
         # Read single-year mortality rates and convert to age groups
-        mort_rates = os.path.join(PROCESSED_FILES, 'mortality', 'cdc_mortality_2019_2023_p1v0.csv')
+        mort_rates = os.path.join(PROCESSED_FILES, 'mortality', 'state_adjusted_cdc_mortality_2023_p1v0.csv')
         state_mort_rates = (pl.read_csv(source=mort_rates)
                              .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2).alias('GEOID')))
 
@@ -425,10 +419,10 @@ class Projector():
                      how='left',
                      coalesce=True)
 
-        df = df.with_columns(((pl.col('MORTALITY_RATE_100K') * (1.0 + (0.01 * self.mort_calibr)) * pl.col('MORT_MULTIPLY')) / 100000.0).alias('MORT_PROJ'))
+        df = df.with_columns(((pl.col('MORTALITY_RATE_100K') * pl.col('MORT_MULTIPLY')) / 100000.0).alias('MORT_PROJ'))
 
         # calculate deaths over 5-year period (multiply by 5)
-        df = df.with_columns((pl.col('MORT_PROJ') * pl.col('POPULATION') * 5.0).alias('DEATHS'))
+        df = df.with_columns((pl.col('MORT_PROJ') * pl.col('POPULATION') * 5.0 * MORT_MULT_PARAM).alias('DEATHS'))
         df = df.select(['GEOID', 'AGE_GROUP', 'SEX', 'DEATHS'])
 
         # store deaths
@@ -439,7 +433,8 @@ class Projector():
         if self.current_projection_year == self.launch_year + 5:
             deaths = self.deaths.rename({'DEATHS': str(self.current_projection_year)})
         else:
-            deaths = pl.read_csv(os.path.join(OUTPUT_FOLDER, f'deaths_by_age_group_sex_{self.scenario}.csv'))
+            deaths = (pl.read_csv(os.path.join(OUTPUT_FOLDER, f'deaths_by_age_group_sex_{self.scenario}.csv'))
+                      .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2)))
             current_deaths = self.deaths.clone()
             current_deaths = current_deaths.rename({'DEATHS': str(self.current_projection_year)})
             deaths = pl.concat(items=[deaths, current_deaths], how='align')
@@ -481,12 +476,13 @@ class Projector():
         if self.current_projection_year == self.launch_year + 5:
             immigration = self.immigrants.rename({'NET_IMMIGRATION': str(self.current_projection_year)}).clone()
         else:
-            immigration = pl.read_csv(os.path.join(OUTPUT_FOLDER, f'immigration_by_age_group_sex_{self.scenario}'))
+            immigration = (pl.read_csv(os.path.join(OUTPUT_FOLDER, f'immigration_by_age_group_sex_{self.scenario}.csv'))
+                           .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2)))
             current_immigration = self.immigrants.clone()
             current_immigration = current_immigration.rename({'NET_IMMIGRATION': str(self.current_projection_year)}).clone()
             immigration = pl.concat(items=[immigration, current_immigration], how='align')
 
-        immigration.write_csv(file=os.path.join(OUTPUT_FOLDER, f'immigration_by_age_group_sex_{self.scenario}'))
+        immigration.write_csv(file=os.path.join(OUTPUT_FOLDER, f'immigration_by_age_group_sex_{self.scenario}.csv'))
 
         total_immigrants_this_year = round(immigration.select(f'{self.current_projection_year}').sum().item())
         print(f"finished! ({total_immigrants_this_year:,} net immigrants this period)")
@@ -539,7 +535,8 @@ class Projector():
                                                     'INFLOWS': f'INMIG{self.current_projection_year}',
                                                     'OUTFLOWS': f'OUTMIG{self.current_projection_year}'}).clone()
         else:
-            migration = pl.read_csv(os.path.join(OUTPUT_FOLDER, 'migration_by_age_group_sex_{self.scenario}'))
+            migration = (pl.read_csv(os.path.join(OUTPUT_FOLDER, f'migration_by_age_group_sex_{self.scenario}.csv'))
+                         .with_columns([pl.col('GEOID').cast(pl.String).str.zfill(2)]))
             current_migration = self.net_migration.clone().rename({'NET_MIGRATION': f'NETMIG{self.current_projection_year}',
                                                                    'INFLOWS': f'INMIG{self.current_projection_year}',
                                                                    'OUTFLOWS': f'OUTMIG{self.current_projection_year}'})
@@ -549,7 +546,7 @@ class Projector():
                                        coalesce=True).sort(by=['GEOID', 'AGE_GROUP', 'SEX'])
 
         self.net_migration = self.net_migration.drop(['INFLOWS', 'OUTFLOWS'])
-        migration.write_csv(os.path.join(OUTPUT_FOLDER, f'migration_by_age_group_sex_{self.scenario}'))
+        migration.write_csv(os.path.join(OUTPUT_FOLDER, f'migration_by_age_group_sex_{self.scenario}.csv'))
 
         pct_migration = round(((total_migrants_this_year / self.current_pop.select('POPULATION').sum().item())) * 100.0, 1)
         print(f"...finished! ({total_migrants_this_year:,} total migrants this period; {pct_migration}% of the current population)")
@@ -565,29 +562,20 @@ class Projector():
         fertile_age_groups = ['15-19', '20-24', '25-29', '30-34', '35-39', '40-44']
 
         # get CDC fertility rates by AGE and COUNTY, aggregate to age groups
-        county_fert_rates = (pl.read_csv(source=os.path.join(PROCESSED_FILES, 'fertility', 'state_cdc_fertility_2020_2024.csv'))
+        state_fert_rates = (pl.read_csv(source=os.path.join(PROCESSED_FILES, 'fertility', 'state_adjusted_cdc_fertility_2024_p1v0.csv'))
                                          .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2).alias('GEOID')))
 
 
         df = self.current_pop.filter((pl.col('SEX') == 'FEMALE') & (pl.col('AGE_GROUP').is_in(fertile_age_groups)))
 
-        # get CBO fertility rate adjustments - aggregate single year to age groups
-        fert_multiply = (pl.read_csv(source=os.path.join(PROCESSED_FILES, 'fertility', 'cbo_fertility_p1v0.csv'))
-                         .select(['AGE', f'ASFR_{self.current_projection_year}'])
+        # get CBO fertility rate adjustments
+        fert_multiply = (pl.read_csv(source=os.path.join(PROCESSED_FILES, 'fertility', 'national_cbo_fertility_p1v0.csv'))
+                         .select(['AGE_GROUP', f'ASFR_{self.current_projection_year}'])
                          .rename({f'ASFR_{self.current_projection_year}': 'FERT_MULT'}))
-
-        # Convert ages to age groups and aggregate
-        fert_multiply = fert_multiply.with_columns(
-            pl.col('AGE').cast(pl.Int32).map_elements(age_to_age_group, return_dtype=pl.Utf8).alias('AGE_GROUP')
-        )
-        fert_multiply = fert_multiply.group_by(['AGE_GROUP']).agg(
-            pl.col('FERT_MULT').mean()
-        )
-        fert_multiply = fert_multiply.filter(pl.col('AGE_GROUP').is_in(fertile_age_groups))
 
         # adjust the county fertility rates using change factors from
         # CBO and then calculate births
-        df = df.join(other=county_fert_rates,
+        df = df.join(other=state_fert_rates,
                      on=['GEOID', 'AGE_GROUP'],
                      how='left',
                      coalesce=True)
@@ -598,7 +586,7 @@ class Projector():
                      coalesce=True)
 
         # Calculate births over 5-year period (multiply by 5)
-        df = df.with_columns(((pl.col('FERTILITY') * (1.0 + (0.01 * self.fert_calibr_pct)) * pl.col('FERT_MULT') / 1000) * pl.col('POPULATION') * 5.0).alias('TOTAL_BIRTHS'))
+        df = df.with_columns(((pl.col('FERTILITY') / 1000) * pl.col('FERT_MULT') * pl.col('POPULATION') * 5.0 * FERT_MULT_PARAM).alias('TOTAL_BIRTHS'))
         df = df.with_columns((pl.col('TOTAL_BIRTHS') * 0.512195122).alias('MALE'))  # from Mathews, et al. (2005)
         df = df.with_columns((pl.col('TOTAL_BIRTHS') - pl.col('MALE')).alias('FEMALE'))
         df = (df.select(['GEOID', 'MALE', 'FEMALE'])
@@ -614,16 +602,13 @@ class Projector():
         if self.current_projection_year == self.launch_year + 5:
             births = self.births.rename({'BIRTHS': str(self.current_projection_year)})
         else:
-            query = f'SELECT * FROM births_by_age_group_sex_{self.scenario}'
-            births = pl.read_database_uri(query=query, uri=OUTPUT_DATABASE_URI)
+            births = (pl.read_csv(source=os.path.join(OUTPUT_FOLDER, f'births_by_age_group_sex_{self.scenario}.csv'))
+                      .with_columns(pl.col('GEOID').cast(pl.String).str.zfill(2)))
             current_births = self.births.clone()
             current_births = current_births.rename({'BIRTHS': str(self.current_projection_year)}).clone()
             births = pl.concat(items=[births, current_births], how='align')
         births.sort(by=['GEOID', 'AGE_GROUP'])
-        births.write_database(table_name=f'births_by_age_group_sex_{self.scenario}',
-                              connection=OUTPUT_DATABASE_URI,
-                              if_table_exists='replace',
-                              engine='adbc')
+        births.write_csv(file=os.path.join(OUTPUT_FOLDER, f'births_by_age_group_sex_{self.scenario}.csv'))
 
         print(f"finished! ({total_births_this_year:,} births this period)")
 
@@ -631,7 +616,5 @@ class Projector():
 if __name__ == '__main__':
     print(time.ctime())
     main(scenario='CBO',
-         version='p1v0',
-         fert_calibr_pct=0.0,
-         mort_calibr_pct=0.0)
+         version='p1v0')
     print(time.ctime())

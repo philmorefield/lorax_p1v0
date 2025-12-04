@@ -1,0 +1,513 @@
+"Notes","State of Residence","State of Residence Code","Age of Mother 9","Age of Mother 9 Code",Births,Female Population,Fertility Rate
+,"Alabama","01","Under 15 years","15",49,Not Available,Not Available
+,"Alabama","01","15-19 years","15-19",3287,172263,19.1
+,"Alabama","01","20-24 years","20-24",13307,171656,77.5
+,"Alabama","01","25-29 years","25-29",18209,163140,111.6
+,"Alabama","01","30-34 years","30-34",15023,174537,86.1
+,"Alabama","01","35-39 years","35-39",6633,166426,39.9
+,"Alabama","01","40-44 years","40-44",1356,163988,8.3
+,"Alabama","01","45-49 years","45-49",65,Not Available,Not Available
+,"Alabama","01","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Alaska","02","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Alaska","02","15-19 years","15-19",317,21860,14.5
+,"Alaska","02","20-24 years","20-24",1739,21602,80.5
+,"Alaska","02","25-29 years","25-29",2536,24424,103.8
+,"Alaska","02","30-34 years","30-34",2566,27587,93.0
+,"Alaska","02","35-39 years","35-39",1446,27307,53.0
+,"Alaska","02","40-44 years","40-44",320,24269,13.2
+,"Alaska","02","45-49 years","45-49",17,Not Available,Not Available
+,"Alaska","02","50 years and over","50+",0,Not Available,Not Available
+,"Arizona","04","Under 15 years","15",23,Not Available,Not Available
+,"Arizona","04","15-19 years","15-19",3410,245135,13.9
+,"Arizona","04","20-24 years","20-24",14857,251722,59.0
+,"Arizona","04","25-29 years","25-29",23188,251681,92.1
+,"Arizona","04","30-34 years","30-34",22990,257745,89.2
+,"Arizona","04","35-39 years","35-39",11502,240976,47.7
+,"Arizona","04","40-44 years","40-44",2547,233335,10.9
+,"Arizona","04","45-49 years","45-49",166,Not Available,Not Available
+,"Arizona","04","50 years and over","50+",28,Not Available,Not Available
+,"Arkansas","05","Under 15 years","15",19,Not Available,Not Available
+,"Arkansas","05","15-19 years","15-19",2273,102497,22.2
+,"Arkansas","05","20-24 years","20-24",8994,100977,89.1
+,"Arkansas","05","25-29 years","25-29",11199,98570,113.6
+,"Arkansas","05","30-34 years","30-34",8440,102873,82.0
+,"Arkansas","05","35-39 years","35-39",3655,98383,37.2
+,"Arkansas","05","40-44 years","40-44",777,98258,7.9
+,"Arkansas","05","45-49 years","45-49",36,Not Available,Not Available
+,"Arkansas","05","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"California","06","Under 15 years","15",132,Not Available,Not Available
+,"California","06","15-19 years","15-19",11164,1288221,8.7
+,"California","06","20-24 years","20-24",52162,1258246,41.5
+,"California","06","25-29 years","25-29",94361,1329995,70.9
+,"California","06","30-34 years","30-34",131359,1469564,89.4
+,"California","06","35-39 years","35-39",88460,1398325,63.3
+,"California","06","40-44 years","40-44",22302,1325624,16.8
+,"California","06","45-49 years","45-49",1816,Not Available,Not Available
+,"California","06","50 years and over","50+",319,Not Available,Not Available
+,"Colorado","08","Under 15 years","15",20,Not Available,Not Available
+,"Colorado","08","15-19 years","15-19",2057,183794,11.2
+,"Colorado","08","20-24 years","20-24",9488,188929,50.2
+,"Colorado","08","25-29 years","25-29",16495,216681,76.1
+,"Colorado","08","30-34 years","30-34",20910,233185,89.7
+,"Colorado","08","35-39 years","35-39",12483,218542,57.1
+,"Colorado","08","40-44 years","40-44",2632,205524,12.8
+,"Colorado","08","45-49 years","45-49",171,Not Available,Not Available
+,"Colorado","08","50 years and over","50+",12,Not Available,Not Available
+,"Connecticut","09","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Connecticut","09","15-19 years","15-19",782,119543,6.5
+,"Connecticut","09","20-24 years","20-24",3549,119409,29.7
+,"Connecticut","09","25-29 years","25-29",7480,110121,67.9
+,"Connecticut","09","30-34 years","30-34",12780,117833,108.5
+,"Connecticut","09","35-39 years","35-39",8068,121481,66.4
+,"Connecticut","09","40-44 years","40-44",1767,118748,14.9
+,"Connecticut","09","45-49 years","45-49",141,Not Available,Not Available
+,"Connecticut","09","50 years and over","50+",23,Not Available,Not Available
+,"Delaware","10","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Delaware","10","15-19 years","15-19",437,33484,13.1
+,"Delaware","10","20-24 years","20-24",1687,30877,54.6
+,"Delaware","10","25-29 years","25-29",2842,30678,92.6
+,"Delaware","10","30-34 years","30-34",3278,34719,94.4
+,"Delaware","10","35-39 years","35-39",1820,34509,52.7
+,"Delaware","10","40-44 years","40-44",456,32194,14.2
+,"Delaware","10","45-49 years","45-49",25,Not Available,Not Available
+,"Delaware","10","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"District of Columbia","11","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"District of Columbia","11","15-19 years","15-19",250,20394,12.3
+,"District of Columbia","11","20-24 years","20-24",845,27521,30.7
+,"District of Columbia","11","25-29 years","25-29",1263,41734,30.3
+,"District of Columbia","11","30-34 years","30-34",2448,40718,60.1
+,"District of Columbia","11","35-39 years","35-39",2163,34105,63.4
+,"District of Columbia","11","40-44 years","40-44",589,27080,21.8
+,"District of Columbia","11","45-49 years","45-49",46,Not Available,Not Available
+,"District of Columbia","11","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Florida","12","Under 15 years","15",105,Not Available,Not Available
+,"Florida","12","15-19 years","15-19",7822,660819,11.8
+,"Florida","12","20-24 years","20-24",35280,670048,52.7
+,"Florida","12","25-29 years","25-29",60600,694212,87.3
+,"Florida","12","30-34 years","30-34",69073,764920,90.3
+,"Florida","12","35-39 years","35-39",40700,765154,53.2
+,"Florida","12","40-44 years","40-44",10054,743508,13.5
+,"Florida","12","45-49 years","45-49",688,Not Available,Not Available
+,"Florida","12","50 years and over","50+",67,Not Available,Not Available
+,"Georgia","13","Under 15 years","15",78,Not Available,Not Available
+,"Georgia","13","15-19 years","15-19",6100,381924,16.0
+,"Georgia","13","20-24 years","20-24",24576,374600,65.6
+,"Georgia","13","25-29 years","25-29",35775,375696,95.2
+,"Georgia","13","30-34 years","30-34",36138,406270,89.0
+,"Georgia","13","35-39 years","35-39",18916,389980,48.5
+,"Georgia","13","40-44 years","40-44",4510,384220,11.7
+,"Georgia","13","45-49 years","45-49",306,Not Available,Not Available
+,"Georgia","13","50 years and over","50+",38,Not Available,Not Available
+,"Hawaii","15","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Hawaii","15","15-19 years","15-19",416,37823,11.0
+,"Hawaii","15","20-24 years","20-24",2398,38749,61.9
+,"Hawaii","15","25-29 years","25-29",3961,42677,92.8
+,"Hawaii","15","30-34 years","30-34",4357,47782,91.2
+,"Hawaii","15","35-39 years","35-39",2899,48784,59.4
+,"Hawaii","15","40-44 years","40-44",800,47625,16.8
+,"Hawaii","15","45-49 years","45-49",74,Not Available,Not Available
+,"Hawaii","15","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Idaho","16","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Idaho","16","15-19 years","15-19",767,77198,9.9
+,"Idaho","16","20-24 years","20-24",4903,64953,75.5
+,"Idaho","16","25-29 years","25-29",7492,61590,121.6
+,"Idaho","16","30-34 years","30-34",6361,64646,98.4
+,"Idaho","16","35-39 years","35-39",3003,64120,46.8
+,"Idaho","16","40-44 years","40-44",698,64908,10.8
+,"Idaho","16","45-49 years","45-49",41,Not Available,Not Available
+,"Idaho","16","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Illinois","17","Under 15 years","15",54,Not Available,Not Available
+,"Illinois","17","15-19 years","15-19",4228,407966,10.4
+,"Illinois","17","20-24 years","20-24",18654,415635,44.9
+,"Illinois","17","25-29 years","25-29",32327,420384,76.9
+,"Illinois","17","30-34 years","30-34",41209,441530,93.3
+,"Illinois","17","35-39 years","35-39",23703,423220,56.0
+,"Illinois","17","40-44 years","40-44",5179,420604,12.3
+,"Illinois","17","45-49 years","45-49",347,Not Available,Not Available
+,"Illinois","17","50 years and over","50+",30,Not Available,Not Available
+,"Indiana","18","Under 15 years","15",43,Not Available,Not Available
+,"Indiana","18","15-19 years","15-19",3468,230875,15.0
+,"Indiana","18","20-24 years","20-24",16555,237164,69.8
+,"Indiana","18","25-29 years","25-29",25202,219121,115.0
+,"Indiana","18","30-34 years","30-34",22411,231305,96.9
+,"Indiana","18","35-39 years","35-39",10276,220376,46.6
+,"Indiana","18","40-44 years","40-44",2154,219079,9.8
+,"Indiana","18","45-49 years","45-49",135,Not Available,Not Available
+,"Indiana","18","50 years and over","50+",13,Not Available,Not Available
+,"Iowa","19","Under 15 years","15",18,Not Available,Not Available
+,"Iowa","19","15-19 years","15-19",1359,111078,12.2
+,"Iowa","19","20-24 years","20-24",6332,112340,56.4
+,"Iowa","19","25-29 years","25-29",11966,97256,123.0
+,"Iowa","19","30-34 years","30-34",11048,100898,109.5
+,"Iowa","19","35-39 years","35-39",4693,97269,48.2
+,"Iowa","19","40-44 years","40-44",957,101181,9.5
+,"Iowa","19","45-49 years","45-49",61,Not Available,Not Available
+,"Iowa","19","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Kansas","20","Under 15 years","15",22,Not Available,Not Available
+,"Kansas","20","15-19 years","15-19",1515,102945,14.7
+,"Kansas","20","20-24 years","20-24",6962,104578,66.6
+,"Kansas","20","25-29 years","25-29",10419,92997,112.0
+,"Kansas","20","30-34 years","30-34",9574,93389,102.5
+,"Kansas","20","35-39 years","35-39",4532,93593,48.4
+,"Kansas","20","40-44 years","40-44",904,95053,9.5
+,"Kansas","20","45-49 years","45-49",50,Not Available,Not Available
+,"Kansas","20","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Kentucky","21","Under 15 years","15",33,Not Available,Not Available
+,"Kentucky","21","15-19 years","15-19",2975,145792,20.4
+,"Kentucky","21","20-24 years","20-24",12495,147584,84.7
+,"Kentucky","21","25-29 years","25-29",16375,144908,113.0
+,"Kentucky","21","30-34 years","30-34",13568,152964,88.7
+,"Kentucky","21","35-39 years","35-39",6159,142750,43.1
+,"Kentucky","21","40-44 years","40-44",1236,144137,8.6
+,"Kentucky","21","45-49 years","45-49",65,Not Available,Not Available
+,"Kentucky","21","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Louisiana","22","Under 15 years","15",56,Not Available,Not Available
+,"Louisiana","22","15-19 years","15-19",3244,152429,21.3
+,"Louisiana","22","20-24 years","20-24",12433,150782,82.5
+,"Louisiana","22","25-29 years","25-29",15897,143006,111.2
+,"Louisiana","22","30-34 years","30-34",13536,157922,85.7
+,"Louisiana","22","35-39 years","35-39",6674,156791,42.6
+,"Louisiana","22","40-44 years","40-44",1409,155293,9.1
+,"Louisiana","22","45-49 years","45-49",52,Not Available,Not Available
+,"Louisiana","22","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Maine","23","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Maine","23","15-19 years","15-19",310,39587,7.8
+,"Maine","23","20-24 years","20-24",1641,38125,43.0
+,"Maine","23","25-29 years","25-29",3267,39331,83.1
+,"Maine","23","30-34 years","30-34",3814,44658,85.4
+,"Maine","23","35-39 years","35-39",2092,45578,45.9
+,"Maine","23","40-44 years","40-44",447,43301,10.3
+,"Maine","23","45-49 years","45-49",24,Not Available,Not Available
+,"Maine","23","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Maryland","24","Under 15 years","15",42,Not Available,Not Available
+,"Maryland","24","15-19 years","15-19",2045,198463,10.3
+,"Maryland","24","20-24 years","20-24",8516,186755,45.6
+,"Maryland","24","25-29 years","25-29",15624,192204,81.3
+,"Maryland","24","30-34 years","30-34",21785,216276,100.7
+,"Maryland","24","35-39 years","35-39",14000,223713,62.6
+,"Maryland","24","40-44 years","40-44",3441,216932,15.9
+,"Maryland","24","45-49 years","45-49",284,Not Available,Not Available
+,"Maryland","24","50 years and over","50+",60,Not Available,Not Available
+,"Massachusetts","25","Under 15 years","15",12,Not Available,Not Available
+,"Massachusetts","25","15-19 years","15-19",1247,229075,5.4
+,"Massachusetts","25","20-24 years","20-24",6238,253697,24.6
+,"Massachusetts","25","25-29 years","25-29",13974,246307,56.7
+,"Massachusetts","25","30-34 years","30-34",25571,249806,102.4
+,"Massachusetts","25","35-39 years","35-39",17185,249272,68.9
+,"Massachusetts","25","40-44 years","40-44",3669,229043,16.0
+,"Massachusetts","25","45-49 years","45-49",252,Not Available,Not Available
+,"Massachusetts","25","50 years and over","50+",36,Not Available,Not Available
+,"Michigan","26","Under 15 years","15",43,Not Available,Not Available
+,"Michigan","26","15-19 years","15-19",3255,315567,10.3
+,"Michigan","26","20-24 years","20-24",16038,333118,48.1
+,"Michigan","26","25-29 years","25-29",29281,316127,92.6
+,"Michigan","26","30-34 years","30-34",32341,343523,94.1
+,"Michigan","26","35-39 years","35-39",15402,315027,48.9
+,"Michigan","26","40-44 years","40-44",2989,307850,9.7
+,"Michigan","26","45-49 years","45-49",159,Not Available,Not Available
+,"Michigan","26","50 years and over","50+",17,Not Available,Not Available
+,"Minnesota","27","Under 15 years","15",21,Not Available,Not Available
+,"Minnesota","27","15-19 years","15-19",1395,189953,7.3
+,"Minnesota","27","20-24 years","20-24",7717,182059,42.4
+,"Minnesota","27","25-29 years","25-29",17129,177125,96.7
+,"Minnesota","27","30-34 years","30-34",21701,189006,114.8
+,"Minnesota","27","35-39 years","35-39",11532,193725,59.5
+,"Minnesota","27","40-44 years","40-44",2430,193771,12.5
+,"Minnesota","27","45-49 years","45-49",161,Not Available,Not Available
+,"Minnesota","27","50 years and over","50+",24,Not Available,Not Available
+,"Mississippi","28","Under 15 years","15",41,Not Available,Not Available
+,"Mississippi","28","15-19 years","15-19",2388,104896,22.8
+,"Mississippi","28","20-24 years","20-24",8644,99411,87.0
+,"Mississippi","28","25-29 years","25-29",10439,91628,113.9
+,"Mississippi","28","30-34 years","30-34",7890,98590,80.0
+,"Mississippi","28","35-39 years","35-39",3358,93548,35.9
+,"Mississippi","28","40-44 years","40-44",674,95607,7.0
+,"Mississippi","28","45-49 years","45-49",38,Not Available,Not Available
+,"Mississippi","28","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Missouri","29","Under 15 years","15",40,Not Available,Not Available
+,"Missouri","29","15-19 years","15-19",3168,199233,15.9
+,"Missouri","29","20-24 years","20-24",13623,202827,67.2
+,"Missouri","29","25-29 years","25-29",20649,197665,104.5
+,"Missouri","29","30-34 years","30-34",19702,211007,93.4
+,"Missouri","29","35-39 years","35-39",8936,203812,43.8
+,"Missouri","29","40-44 years","40-44",1764,201948,8.7
+,"Missouri","29","45-49 years","45-49",111,Not Available,Not Available
+,"Missouri","29","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Montana","30","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Montana","30","15-19 years","15-19",373,33581,11.1
+,"Montana","30","20-24 years","20-24",1950,35596,54.8
+,"Montana","30","25-29 years","25-29",3512,34429,102.0
+,"Montana","30","30-34 years","30-34",3333,36865,90.4
+,"Montana","30","35-39 years","35-39",1800,36110,49.8
+,"Montana","30","40-44 years","40-44",336,36202,9.3
+,"Montana","30","45-49 years","45-49",19,Not Available,Not Available
+,"Montana","30","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Nebraska","31","Under 15 years","15",12,Not Available,Not Available
+,"Nebraska","31","15-19 years","15-19",970,69468,14.0
+,"Nebraska","31","20-24 years","20-24",4170,70925,58.8
+,"Nebraska","31","25-29 years","25-29",7762,62724,123.7
+,"Nebraska","31","30-34 years","30-34",7530,63338,118.9
+,"Nebraska","31","35-39 years","35-39",3553,62880,56.5
+,"Nebraska","31","40-44 years","40-44",747,64722,11.5
+,"Nebraska","31","45-49 years","45-49",41,Not Available,Not Available
+,"Nebraska","31","50 years and over","50+",0,Not Available,Not Available
+,"Nevada","32","Under 15 years","15",10,Not Available,Not Available
+,"Nevada","32","15-19 years","15-19",1211,96886,12.5
+,"Nevada","32","20-24 years","20-24",5538,92553,59.8
+,"Nevada","32","25-29 years","25-29",9166,108967,84.1
+,"Nevada","32","30-34 years","30-34",9661,121394,79.6
+,"Nevada","32","35-39 years","35-39",5424,115567,46.9
+,"Nevada","32","40-44 years","40-44",1293,110573,11.7
+,"Nevada","32","45-49 years","45-49",72,Not Available,Not Available
+,"Nevada","32","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"New Hampshire","33","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"New Hampshire","33","15-19 years","15-19",185,40384,4.6
+,"New Hampshire","33","20-24 years","20-24",1092,41746,26.2
+,"New Hampshire","33","25-29 years","25-29",3044,40478,75.2
+,"New Hampshire","33","30-34 years","30-34",4555,45759,99.5
+,"New Hampshire","33","35-39 years","35-39",2400,45277,53.0
+,"New Hampshire","33","40-44 years","40-44",461,42618,10.8
+,"New Hampshire","33","45-49 years","45-49",30,Not Available,Not Available
+,"New Hampshire","33","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"New Jersey","34","Under 15 years","15",31,Not Available,Not Available
+,"New Jersey","34","15-19 years","15-19",2115,289377,7.3
+,"New Jersey","34","20-24 years","20-24",11451,285347,40.1
+,"New Jersey","34","25-29 years","25-29",22031,293443,75.1
+,"New Jersey","34","30-34 years","30-34",36064,320865,112.4
+,"New Jersey","34","35-39 years","35-39",23693,317974,74.5
+,"New Jersey","34","40-44 years","40-44",5523,313892,17.6
+,"New Jersey","34","45-49 years","45-49",416,Not Available,Not Available
+,"New Jersey","34","50 years and over","50+",48,Not Available,Not Available
+,"New Mexico","35","Under 15 years","15",16,Not Available,Not Available
+,"New Mexico","35","15-19 years","15-19",1280,70961,18.0
+,"New Mexico","35","20-24 years","20-24",4956,69660,71.1
+,"New Mexico","35","25-29 years","25-29",6131,65545,93.5
+,"New Mexico","35","30-34 years","30-34",5504,69924,78.7
+,"New Mexico","35","35-39 years","35-39",2798,68064,41.1
+,"New Mexico","35","40-44 years","40-44",609,67127,9.1
+,"New Mexico","35","45-49 years","45-49",32,Not Available,Not Available
+,"New Mexico","35","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"New York","36","Under 15 years","15",63,Not Available,Not Available
+,"New York","36","15-19 years","15-19",4766,592619,8.0
+,"New York","36","20-24 years","20-24",28422,642850,44.2
+,"New York","36","25-29 years","25-29",47813,692410,69.1
+,"New York","36","30-34 years","30-34",66954,715586,93.6
+,"New York","36","35-39 years","35-39",44672,673723,66.3
+,"New York","36","40-44 years","40-44",11687,630068,18.5
+,"New York","36","45-49 years","45-49",983,Not Available,Not Available
+,"New York","36","50 years and over","50+",129,Not Available,Not Available
+,"North Carolina","37","Under 15 years","15",59,Not Available,Not Available
+,"North Carolina","37","15-19 years","15-19",5168,361264,14.3
+,"North Carolina","37","20-24 years","20-24",22590,363466,62.2
+,"North Carolina","37","25-29 years","25-29",34560,361800,95.5
+,"North Carolina","37","30-34 years","30-34",36931,389384,94.8
+,"North Carolina","37","35-39 years","35-39",19225,371432,51.8
+,"North Carolina","37","40-44 years","40-44",4068,355907,11.4
+,"North Carolina","37","45-49 years","45-49",232,Not Available,Not Available
+,"North Carolina","37","50 years and over","50+",23,Not Available,Not Available
+,"North Dakota","38","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"North Dakota","38","15-19 years","15-19",325,27671,11.7
+,"North Dakota","38","20-24 years","20-24",1660,30605,54.2
+,"North Dakota","38","25-29 years","25-29",3168,26094,121.4
+,"North Dakota","38","30-34 years","30-34",2920,26289,111.1
+,"North Dakota","38","35-39 years","35-39",1310,25064,52.3
+,"North Dakota","38","40-44 years","40-44",237,23826,9.9
+,"North Dakota","38","45-49 years","45-49",12,Not Available,Not Available
+,"North Dakota","38","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Ohio","39","Under 15 years","15",69,Not Available,Not Available
+,"Ohio","39","15-19 years","15-19",5267,374990,14.0
+,"Ohio","39","20-24 years","20-24",23667,371098,63.8
+,"Ohio","39","25-29 years","25-29",37655,376188,100.1
+,"Ohio","39","30-34 years","30-34",38047,403603,94.3
+,"Ohio","39","35-39 years","35-39",18382,383844,47.9
+,"Ohio","39","40-44 years","40-44",3481,371569,9.4
+,"Ohio","39","45-49 years","45-49",205,Not Available,Not Available
+,"Ohio","39","50 years and over","50+",22,Not Available,Not Available
+,"Oklahoma","40","Under 15 years","15",38,Not Available,Not Available
+,"Oklahoma","40","15-19 years","15-19",2746,140158,19.6
+,"Oklahoma","40","20-24 years","20-24",11643,139993,83.2
+,"Oklahoma","40","25-29 years","25-29",15090,132307,114.1
+,"Oklahoma","40","30-34 years","30-34",11869,139176,85.3
+,"Oklahoma","40","35-39 years","35-39",5434,134988,40.3
+,"Oklahoma","40","40-44 years","40-44",1097,135313,8.1
+,"Oklahoma","40","45-49 years","45-49",41,Not Available,Not Available
+,"Oklahoma","40","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Oregon","41","Under 15 years","15",10,Not Available,Not Available
+,"Oregon","41","15-19 years","15-19",1133,125913,9.0
+,"Oregon","41","20-24 years","20-24",5931,129955,45.6
+,"Oregon","41","25-29 years","25-29",10769,137411,78.4
+,"Oregon","41","30-34 years","30-34",12073,153956,78.4
+,"Oregon","41","35-39 years","35-39",7287,150787,48.3
+,"Oregon","41","40-44 years","40-44",1639,147868,11.1
+,"Oregon","41","45-49 years","45-49",112,Not Available,Not Available
+,"Oregon","41","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Pennsylvania","42","Under 15 years","15",57,Not Available,Not Available
+,"Pennsylvania","42","15-19 years","15-19",4034,416257,9.7
+,"Pennsylvania","42","20-24 years","20-24",19005,405043,46.9
+,"Pennsylvania","42","25-29 years","25-29",33580,392609,85.5
+,"Pennsylvania","42","30-34 years","30-34",42563,432996,98.3
+,"Pennsylvania","42","35-39 years","35-39",23073,433233,53.3
+,"Pennsylvania","42","40-44 years","40-44",4623,406274,11.4
+,"Pennsylvania","42","45-49 years","45-49",334,Not Available,Not Available
+,"Pennsylvania","42","50 years and over","50+",30,Not Available,Not Available
+,"Rhode Island","44","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Rhode Island","44","15-19 years","15-19",273,36309,7.5
+,"Rhode Island","44","20-24 years","20-24",1204,38357,31.4
+,"Rhode Island","44","25-29 years","25-29",2373,35443,67.0
+,"Rhode Island","44","30-34 years","30-34",3580,39490,90.7
+,"Rhode Island","44","35-39 years","35-39",2097,37615,55.7
+,"Rhode Island","44","40-44 years","40-44",448,35068,12.8
+,"Rhode Island","44","45-49 years","45-49",29,Not Available,Not Available
+,"Rhode Island","44","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"South Carolina","45","Under 15 years","15",44,Not Available,Not Available
+,"South Carolina","45","15-19 years","15-19",3072,176964,17.4
+,"South Carolina","45","20-24 years","20-24",11342,172215,65.9
+,"South Carolina","45","25-29 years","25-29",17129,168829,101.5
+,"South Carolina","45","30-34 years","30-34",16906,186316,90.7
+,"South Carolina","45","35-39 years","35-39",8349,180416,46.3
+,"South Carolina","45","40-44 years","40-44",1827,174613,10.5
+,"South Carolina","45","45-49 years","45-49",92,Not Available,Not Available
+,"South Carolina","45","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"South Dakota","46","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"South Dakota","46","15-19 years","15-19",469,30660,15.3
+,"South Dakota","46","20-24 years","20-24",2030,29433,69.0
+,"South Dakota","46","25-29 years","25-29",3687,27054,136.3
+,"South Dakota","46","30-34 years","30-34",3437,28047,122.5
+,"South Dakota","46","35-39 years","35-39",1512,28230,53.6
+,"South Dakota","46","40-44 years","40-44",290,28183,10.3
+,"South Dakota","46","45-49 years","45-49",17,Not Available,Not Available
+,"South Dakota","46","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Tennessee","47","Under 15 years","15",71,Not Available,Not Available
+,"Tennessee","47","15-19 years","15-19",4489,225606,19.9
+,"Tennessee","47","20-24 years","20-24",17791,232836,76.4
+,"Tennessee","47","25-29 years","25-29",24961,245812,101.5
+,"Tennessee","47","30-34 years","30-34",23002,257426,89.4
+,"Tennessee","47","35-39 years","35-39",11046,240580,45.9
+,"Tennessee","47","40-44 years","40-44",2348,231396,10.1
+,"Tennessee","47","45-49 years","45-49",120,Not Available,Not Available
+,"Tennessee","47","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Texas","48","Under 15 years","15",243,Not Available,Not Available
+,"Texas","48","15-19 years","15-19",20206,1094181,18.5
+,"Texas","48","20-24 years","20-24",77586,1071824,72.4
+,"Texas","48","25-29 years","25-29",111576,1092157,102.2
+,"Texas","48","30-34 years","30-34",110032,1145834,96.0
+,"Texas","48","35-39 years","35-39",57340,1111078,51.6
+,"Texas","48","40-44 years","40-44",12957,1078727,12.0
+,"Texas","48","45-49 years","45-49",804,Not Available,Not Available
+,"Texas","48","50 years and over","50+",84,Not Available,Not Available
+,"Utah","49","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Utah","49","15-19 years","15-19",1158,141300,8.2
+,"Utah","49","20-24 years","20-24",8646,150004,57.6
+,"Utah","49","25-29 years","25-29",16479,132270,124.6
+,"Utah","49","30-34 years","30-34",13064,124714,104.8
+,"Utah","49","35-39 years","35-39",5844,113641,51.4
+,"Utah","49","40-44 years","40-44",1384,117154,11.8
+,"Utah","49","45-49 years","45-49",71,Not Available,Not Available
+,"Utah","49","50 years and over","50+",10,Not Available,Not Available
+,"Vermont","50","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Vermont","50","15-19 years","15-19",128,20158,6.3
+,"Vermont","50","20-24 years","20-24",661,21593,30.6
+,"Vermont","50","25-29 years","25-29",1269,17940,70.7
+,"Vermont","50","30-34 years","30-34",1659,20032,82.8
+,"Vermont","50","35-39 years","35-39",1060,20382,52.0
+,"Vermont","50","40-44 years","40-44",231,20443,11.3
+,"Vermont","50","45-49 years","45-49",14,Not Available,Not Available
+,"Vermont","50","50 years and over","50+",0,Not Available,Not Available
+,"Virginia","51","Under 15 years","15",26,Not Available,Not Available
+,"Virginia","51","15-19 years","15-19",2985,279766,10.7
+,"Virginia","51","20-24 years","20-24",14185,283226,50.1
+,"Virginia","51","25-29 years","25-29",24703,281800,87.7
+,"Virginia","51","30-34 years","30-34",29782,303417,98.2
+,"Virginia","51","35-39 years","35-39",17848,305203,58.5
+,"Virginia","51","40-44 years","40-44",4169,297907,14.0
+,"Virginia","51","45-49 years","45-49",316,Not Available,Not Available
+,"Virginia","51","50 years and over","50+",40,Not Available,Not Available
+,"Washington","53","Under 15 years","15",23,Not Available,Not Available
+,"Washington","53","15-19 years","15-19",2163,233078,9.3
+,"Washington","53","20-24 years","20-24",11984,236942,50.6
+,"Washington","53","25-29 years","25-29",21527,275748,78.1
+,"Washington","53","30-34 years","30-34",27347,309363,88.4
+,"Washington","53","35-39 years","35-39",16189,293270,55.2
+,"Washington","53","40-44 years","40-44",3605,272909,13.2
+,"Washington","53","45-49 years","45-49",251,Not Available,Not Available
+,"Washington","53","50 years and over","50+",29,Not Available,Not Available
+,"West Virginia","54","Under 15 years","15",11,Not Available,Not Available
+,"West Virginia","54","15-19 years","15-19",939,52731,17.8
+,"West Virginia","54","20-24 years","20-24",4302,54188,79.4
+,"West Virginia","54","25-29 years","25-29",5543,50193,110.4
+,"West Virginia","54","30-34 years","30-34",4125,53582,77.0
+,"West Virginia","54","35-39 years","35-39",1749,50017,35.0
+,"West Virginia","54","40-44 years","40-44",336,52934,6.3
+,"West Virginia","54","45-49 years","45-49",16,Not Available,Not Available
+,"West Virginia","54","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Wisconsin","55","Under 15 years","15",30,Not Available,Not Available
+,"Wisconsin","55","15-19 years","15-19",1851,191373,9.7
+,"Wisconsin","55","20-24 years","20-24",9001,199088,45.2
+,"Wisconsin","55","25-29 years","25-29",17437,181352,96.2
+,"Wisconsin","55","30-34 years","30-34",19985,187243,106.7
+,"Wisconsin","55","35-39 years","35-39",9380,183054,51.2
+,"Wisconsin","55","40-44 years","40-44",1904,187785,10.1
+,"Wisconsin","55","45-49 years","45-49",91,Not Available,Not Available
+,"Wisconsin","55","50 years and over","50+",Suppressed,Not Available,Suppressed
+,"Wyoming","56","Under 15 years","15",Suppressed,Not Available,Suppressed
+,"Wyoming","56","15-19 years","15-19",288,19587,14.7
+,"Wyoming","56","20-24 years","20-24",1360,18214,74.7
+,"Wyoming","56","25-29 years","25-29",1902,16879,112.7
+,"Wyoming","56","30-34 years","30-34",1613,18421,87.6
+,"Wyoming","56","35-39 years","35-39",762,18664,40.8
+,"Wyoming","56","40-44 years","40-44",154,19259,8.0
+,"Wyoming","56","45-49 years","45-49",Suppressed,Not Available,Suppressed
+,"Wyoming","56","50 years and over","50+",0,Not Available,Not Available
+"---"
+"Dataset: Natality, 2016-2024 expanded"
+"Query Parameters:"
+"Year: 2024"
+"Group By: State of Residence; Age of Mother 9"
+"Show Totals: Disabled"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 1,000"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/natality-expanded.html for more information."
+"---"
+"Query Date: Dec 4, 2025 2:42:01 AM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Natality on CDC WONDER Online Database. Data are from the Natality Records 2016-2024, as compiled from data provided by"
+"the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at"
+"http://wonder.cdc.gov/natality-expanded-current.html on Dec 4, 2025 2:42:01 AM"
+"---"
+Messages:
+"1. Totals are not available for these results due to suppression constraints. More Information:"
+"http://wonder.cdc.gov/wonder/help/faq.html#Privacy."
+"---"
+Caveats:
+"1. 'Not Available' appears when the denominator population for a rate measure is not available."
+"2. 'Suppressed' appears when the data do not meet the criteria for confidentiality constraints. More information:"
+"http://wonder.cdc.gov/wonder/help/natality-expanded.html#Assurance of Confidentiality."
+"3. Each birth record represents one liveborn infant."
+"4. Fertility rates are calculated as the number of births divided by the number of females age 15 - 44 years old in the given"
+"year(s). When the numerator is sub-set by mother's age, mother's race, mother's hispanicity, location, or year of birth, then"
+"the same sub-set for age, race, hispanicity, location and year applies to the denominator population. However, if you sub-set"
+"mother's age selecting some years not in the 15 - 44 range, those years of mother's age ouside this range will not be included"
+"in the denominator population. If you sub-set mother's age selecting only years outside the 15 - 44 range, then ""Not"
+"Available"" is reported for the denominator population."
+"5. Birth rates and fertility rates are calculated using the following populations: The populations for year 2024 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 26, 2025. The"
+"2024 population estimates are based on the Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial"
+"population count. The populations for year 2023 are from the postcensal single race series of July 1st estimates of the resident"
+"population, released by Census Bureau on June 27, 2024. The 2023 population estimates are based on the Blended Base produced by"
+"the US Census Bureau in lieu of the April 1, 2020 decennial population count. The populations for year 2022 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 22, 2023. The"
+"2022 population estimates are based on the Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial"
+"population count. The populations for year 2021 are from the postcensal single race series of July 1st estimates of the resident"
+"population, released by Census Bureau on June 30, 2022. The 2021 population estimates are based on the Blended Base produced by"
+"the US Census Bureau in lieu of the April 1, 2020 decennial population count. The populations for year 2020 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on July 27, 2021. The"
+"populations for year 2019 are from the postcensal single race series of July 1st estimates of the resident population, released"
+"by Census Bureau on June 25, 2020; The populations for year 2018 are from the postcensal single race series of July 1st"
+"estimates of the resident population, released by Census Bureau on June 21, 2019; The populations for year 2017 are from the"
+"postcensal single race series of July 1st estimates of the resident population, released by Census Bureau on June 21, 2018; The"
+"populations for year 2016 are from the postcensal single race series of July 1st estimates of the resident population, released"
+"by Census Bureau on June 22, 2017. More information:"
+"http://wonder.cdc.gov/wonder/help/natality-expanded.html#Denominator-Population-Sources."

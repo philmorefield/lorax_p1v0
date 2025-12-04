@@ -1,0 +1,78 @@
+"Notes","Ten-Year Age Groups","Ten-Year Age Groups Code","Sex","Sex Code","HHS Region","HHS Region Code",Deaths,Population,Crude Rate
+,"85+ years","85+","Female","F","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",30086,208592,14423.4
+,"85+ years","85+","Female","F","HHS Region #2  NJ, NY","HHS2",48855,402033,12152.0
+,"85+ years","85+","Female","F","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",56413,402388,14019.6
+,"85+ years","85+","Female","F","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",112082,824550,13593.1
+,"85+ years","85+","Female","F","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",94333,650237,14507.5
+,"85+ years","85+","Female","F","HHS Region #6  AR, LA, NM, OK, TX","HHS6",56134,396069,14172.8
+,"85+ years","85+","Female","F","HHS Region #7  IA, KS, MO, NE","HHS7",26603,184866,14390.4
+,"85+ years","85+","Female","F","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",17006,118506,14350.3
+,"85+ years","85+","Female","F","HHS Region #9  AZ, CA, HI, NV","HHS9",71724,575611,12460.5
+,"85+ years","85+","Female","F","HHS Region #10  AK, ID, OR, WA","HHS10",21564,148167,14553.8
+"Total","85+ years","85+","Female","F",,,534800,3911019,13674.2
+,"85+ years","85+","Male","M","HHS Region #1  CT, ME, MA, NH, RI, VT","HHS1",18858,112380,16780.6
+,"85+ years","85+","Male","M","HHS Region #2  NJ, NY","HHS2",30043,217319,13824.4
+,"85+ years","85+","Male","M","HHS Region #3  DE, DC, MD, PA, VA, WV","HHS3",35572,220723,16116.1
+,"85+ years","85+","Male","M","HHS Region #4  AL, FL, GA, KY, MS, NC, SC, TN","HHS4",73178,506752,14440.6
+,"85+ years","85+","Male","M","HHS Region #5  IL, IN, MI, MN, OH, WI","HHS5",60431,357885,16885.6
+,"85+ years","85+","Male","M","HHS Region #6  AR, LA, NM, OK, TX","HHS6",36792,234788,15670.3
+,"85+ years","85+","Male","M","HHS Region #7  IA, KS, MO, NE","HHS7",17333,102147,16968.7
+,"85+ years","85+","Male","M","HHS Region #8  CO, MT, ND, SD, UT, WY","HHS8",12056,72804,16559.5
+,"85+ years","85+","Male","M","HHS Region #9  AZ, CA, HI, NV","HHS9",50580,365731,13829.8
+,"85+ years","85+","Male","M","HHS Region #10  AK, ID, OR, WA","HHS10",15361,93432,16440.8
+"Total","85+ years","85+","Male","M",,,350204,2283961,15333.2
+"Total","85+ years","85+",,,,,885004,6194980,14285.8
+"Total",,,,,,,885004,6194980,14285.8
+"---"
+"Dataset: Underlying Cause of Death, 2018-2023, Single Race"
+"Query Parameters:"
+"Ten-Year Age Groups: 85+ years"
+"Year/Month: 2023"
+"Group By: Ten-Year Age Groups; Sex; HHS Region"
+"Show Totals: True"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 100,000"
+"Rate Options: Default intercensal populations for years 2001-2009 (except Infant Age Groups)"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/ucd-expanded.html for more information."
+"---"
+"Query Date: Dec 4, 2025 1:56:40 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files,"
+"2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
+"Program. Accessed at http://wonder.cdc.gov/ucd-icd10-expanded.html on Dec 4, 2025 1:56:40 PM"
+"---"
+Caveats:
+"1. Deaths of persons with Age ""Not Stated"" are included in ""All"" counts and rates, but are not distributed among age groups,"
+"so are not included in age-specific counts, age-specific rates or in any age-adjusted rates. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Not Stated."
+"2. The population figures for years 2023 are single-race estimates of the July 1 resident population, from the Vintage 2023"
+"postcensal series released by the Census Bureau on June 27, 2024. The 2023 series is based on the Modified Blended Base produced"
+"by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The Modified Blended Base consists of the blend"
+"of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic Analysis Estimates, and 2020 Census data"
+"from the internal Census Edited File (CEF). The population figures for years 2022 are single-race estimates of the July 1"
+"resident population, from the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023. The 2022 series is"
+"based on the Modified Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The"
+"Modified Blended Base consists of the blend of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic"
+"Analysis Estimates, and 2020 Census data from the internal Census Edited File (CEF). The population figures for years 2021 are"
+"single-race estimates of the July 1 resident population, based on the Blended Base produced by the US Census Bureau in lieu of"
+"the April 1, 2020 decennial population count, from the Vintage 2021 postcensal series released by the Census Bureau on June 30,"
+"2022. The population figures for year 2020 are single-race estimates of the July 1 resident population, from the Vintage 2020"
+"postcensal series based on April 2010 Census, released by the Census Bureau on July 27, 2021. The population figures for year"
+"2019 are single-race estimates of the July 1 resident population, from the Vintage 2019 postcensal series based on April 2010"
+"Census, released by the Census Bureau on June 25, 2020. The population figures for year 2018 are single-race estimates of the"
+"July 1 resident population, from the Vintage 2018 postcensal series based on April 2010 Census, released by the Census Bureau on"
+"June 20, 2019. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Population Data."
+"3. Connecticut population estimates for 2022 and later years are reported for 9 planning regions as county equivalent areas,"
+"instead of the former 8 legacy counties in the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023,"
+"and in the Vintage 2023 postcensal series released by the Census Bureau on June 27, 2024. Populations estimates for the former"
+"counties are not available for 2022 and later years. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Connecticut-2022."
+"4. After the creation of the final 2023 dataset, North Carolina updated the cause of death information for over 900 death"
+"certificates to include a cause of death code indicating drug overdose (ICD-10 underlying cause-of-death codes: X40-X44,"
+"X60-X64, X85, and Y10-Y14). Jurisdictions can continue to update death certificates after the closing of the mortality file. As"
+"a result, users should consider that the actual death count for drug overdose deaths for North Carolina in 2023 is over 4,400"
+"deaths, with a crude rate of approximately 41.0 per 100,000 population, and an age-adjusted rate of approximately 42.1 per"
+"100,000 population. These deaths will not be updated on the final mortality datasets."

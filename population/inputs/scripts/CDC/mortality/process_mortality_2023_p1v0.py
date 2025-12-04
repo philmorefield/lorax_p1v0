@@ -1,4 +1,3 @@
-import glob
 import os
 
 from itertools import product
@@ -64,7 +63,7 @@ def create_template():
             '80-84',
             '85+']
 
-    stfips = list(stfips_all.STFIPS.values)
+    stfips = list(set(stfips_all.STFIPS.values))
     genders = ['MALE', 'FEMALE']
 
     df = pd.DataFrame(list(product(stfips, ages, genders)),
@@ -75,51 +74,24 @@ def create_template():
 
 def apply_state_level_mortality(df):
 
-    dataframes = []
-
     # process age groups <85 first
-    for csv in glob.glob(os.path.join(CDC_FILES, 'Underlying*.csv')):
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
-        if 'state' not in os.path.basename(csv):
-            continue
-        if '85+' in os.path.basename(csv):
-            continue
-        if 'Sex' not in temp.columns:
-            if 'female' in os.path.basename(csv).lower():
-                temp['Sex'] = 'Female'
-            else:
-                temp['Sex'] = 'Male'
-
-        temp = temp[['State Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
-        temp.columns = ['STFIPS', 'SEX', 'AGE_GROUP', 'STATE_MORTALITY']
-        temp.dropna(how='any', inplace=True)
-        temp['STFIPS'] = temp['STFIPS'].astype(int).astype(str).str.zfill(5)
-
-        dataframes.append(temp)
+    csv = os.path.join(CDC_FILES, 'Underlying Cause of Death, 2023, State.csv')
+    temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
+    temp = temp[['State Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
+    temp.columns = ['STFIPS', 'SEX', 'AGE_GROUP', 'STATE_MORTALITY']
+    temp.dropna(how='any', inplace=True)
+    temp['STFIPS'] = temp['STFIPS'].astype(int).astype(str).str.zfill(2)
 
     # process the 85+ age group
-    for csv in glob.glob(os.path.join(CDC_FILES, 'Underlying*.csv')):
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
-        if '85+' not in os.path.basename(csv):
-            continue
-        if 'state' not in os.path.basename(csv):
-            continue
-        if 'Sex' not in temp.columns:
-            if 'female' in os.path.basename(csv).lower():
-                temp['Sex'] = 'Female'
-            else:
-                temp['Sex'] = 'Male'
+    csv = os.path.join(CDC_FILES, 'Underlying Cause of Death, 2023, State, 85+.csv')
+    temp85 = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
+    temp85['Ten-Year Age Groups Code'] = '85+'
+    temp85 = temp85[['State Code', 'Sex', 'Ten-Year Age Groups Code', 'Crude Rate']]
+    temp85.columns = ['STFIPS', 'SEX', 'AGE_GROUP', 'STATE_MORTALITY']
+    temp85.dropna(how='any', inplace=True)
+    temp85['STFIPS'] = temp85['STFIPS'].astype(int).astype(str).str.zfill(2)
 
-        temp['Ten-Year Age Groups Code'] = '85+'
-        temp = temp[['State Code', 'Sex', 'Ten-Year Age Groups Code', 'Crude Rate']]
-        temp.columns = ['STFIPS', 'SEX', 'AGE_GROUP', 'STATE_MORTALITY']
-        temp.dropna(how='any', inplace=True)
-        temp['STFIPS'] = temp['STFIPS'].astype(int).astype(str).str.zfill(5)
-
-        dataframes.append(temp)
-
-    mort = pd.concat(objs=dataframes, ignore_index=True)
-    mort['STFIPS'] = mort['STFIPS'].astype(int).astype(str).str.zfill(2)
+    mort = pd.concat(objs=[temp, temp85], ignore_index=True)
     mort['SEX'] = mort['SEX'].str.upper()
 
     df = df.merge(right=mort, how='left', on=['STFIPS', 'SEX', 'AGE_GROUP'])
@@ -132,34 +104,21 @@ def apply_hhs_level_mortality(df):
     hhs = get_stfips()[['STFIPS', 'HHS']].drop_duplicates()
     hhs = hhs.rename(columns={'HHS': 'HHS_REGION'})
 
-    dataframes = []
-
-    for sex in ['male', 'female']:
-        fn = f'Underlying Cause of Death, 2019-2023, {sex}, HHS.csv'
-        csv = os.path.join(CDC_FILES, fn)
-        temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
-        if 'Sex' not in temp.columns:
-            if sex == 'female':
-                temp['Sex'] = 'Female'
-            else:
-                temp['Sex'] = 'Male'
-        temp = temp[['HHS Region Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
-        temp.columns = ['HHS_REGION', 'SEX', 'AGE_GROUP', 'HHS_MORTALITY']
-        temp.dropna(how='any', inplace=True)
-
-        dataframes.append(temp)
-
-    # add 85+ age group to the dataframe
-    csv = os.path.join(CDC_FILES, 'Underlying Cause of Death, 2019-2023, 85+, HHS.csv')
+    csv = os.path.join(CDC_FILES, 'Underlying Cause of Death, 2023, HHS.csv')
     temp = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
-    temp['Five-Year Age Groups Code'] = '85+'
     temp = temp[['HHS Region Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
     temp.columns = ['HHS_REGION', 'SEX', 'AGE_GROUP', 'HHS_MORTALITY']
     temp.dropna(how='any', inplace=True)
 
-    dataframes.append(temp)
+    # add 85+ age group to the dataframe
+    csv = os.path.join(CDC_FILES, 'Underlying Cause of Death, 2023, HHS, 85+.csv')
+    temp85 = pd.read_csv(filepath_or_buffer=csv, sep=None, engine='python', na_values=NA_VALUES)
+    temp85['Five-Year Age Groups Code'] = '85+'
+    temp85 = temp85[['HHS Region Code', 'Sex', 'Five-Year Age Groups Code', 'Crude Rate']]
+    temp85.columns = ['HHS_REGION', 'SEX', 'AGE_GROUP', 'HHS_MORTALITY']
+    temp85.dropna(how='any', inplace=True)
 
-    mort = pd.concat(objs=dataframes, ignore_index=True)
+    mort = pd.concat(objs=[temp, temp85], ignore_index=True)
     mort['HHS_REGION'] = mort['HHS_REGION'].str.replace('HHS', '').astype(int)
     mort['SEX'] = mort['SEX'].str.upper()
 
@@ -207,13 +166,13 @@ def main():
     assert df.MORTALITY.isnull().sum() == 0, "Some mortality rates are still null!"
 
     df = combine_under_5_age_groups(df)
-    df = df.reset_index().groupby(by=['STFIPS', 'AGE_GROUP', 'SEX'], as_index=False).mean()
+    df = df.reset_index(drop=True).groupby(by=['STFIPS', 'AGE_GROUP', 'SEX'], as_index=False).mean()
 
     df = df.sort_values(by=['AGE_GROUP', 'STFIPS'], key=lambda x: x.map(AGE_GROUP_SORT_MAP))
     df = df.rename(columns={'MORTALITY': 'MORTALITY_RATE_100K',
                             'STFIPS': 'GEOID'})
 
-    df.to_csv(os.path.join(PROCESSED_FILES, 'mortality', 'cdc_mortality_2019_2023_p1v0.csv'), index=False)
+    df.to_csv(os.path.join(PROCESSED_FILES, 'mortality', 'state_cdc_mortality_2023_p1v0.csv'), index=False)
 
     print("Finished!")
 

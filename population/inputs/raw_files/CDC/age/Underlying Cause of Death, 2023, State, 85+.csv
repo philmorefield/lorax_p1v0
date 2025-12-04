@@ -1,0 +1,160 @@
+"Notes","Ten-Year Age Groups","Ten-Year Age Groups Code","Sex","Sex Code","State","State Code",Deaths,Population,Crude Rate
+,"85+ years","85+","Female","F","Alabama","01",8471,58478,14485.8
+,"85+ years","85+","Female","F","Alaska","02",541,4302,12575.5
+,"85+ years","85+","Female","F","Arizona","04",10580,84985,12449.3
+,"85+ years","85+","Female","F","Arkansas","05",5097,35393,14401.2
+,"85+ years","85+","Female","F","California","06",54986,438008,12553.7
+,"85+ years","85+","Female","F","Colorado","08",7728,53895,14339.0
+,"85+ years","85+","Female","F","Connecticut","09",7233,51971,13917.4
+,"85+ years","85+","Female","F","Delaware","10",1747,12114,14421.3
+,"85+ years","85+","Female","F","District of Columbia","11",728,6993,10410.4
+,"85+ years","85+","Female","F","Florida","12",40522,343897,11783.2
+,"85+ years","85+","Female","F","Georgia","13",13794,96965,14225.8
+,"85+ years","85+","Female","F","Hawaii","15",2604,26042,9999.2
+,"85+ years","85+","Female","F","Idaho","16",2713,17999,15073.1
+,"85+ years","85+","Female","F","Illinois","17",20831,157404,13234.1
+,"85+ years","85+","Female","F","Indiana","18",11502,79019,14556.0
+,"85+ years","85+","Female","F","Iowa","19",6736,46948,14347.8
+,"85+ years","85+","Female","F","Kansas","20",5408,36798,14696.5
+,"85+ years","85+","Female","F","Kentucky","21",7366,48654,15139.6
+,"85+ years","85+","Female","F","Louisiana","22",6907,48106,14357.9
+,"85+ years","85+","Female","F","Maine","23",3181,20012,15895.5
+,"85+ years","85+","Female","F","Maryland","24",9256,73369,12615.7
+,"85+ years","85+","Female","F","Massachusetts","25",13304,93420,14241.1
+,"85+ years","85+","Female","F","Michigan","26",18245,120154,15184.7
+,"85+ years","85+","Female","F","Minnesota","27",10056,74082,13574.1
+,"85+ years","85+","Female","F","Mississippi","28",4933,33398,14770.3
+,"85+ years","85+","Female","F","Missouri","29",10828,77174,14030.6
+,"85+ years","85+","Female","F","Montana","30",1908,13082,14584.9
+,"85+ years","85+","Female","F","Nebraska","31",3631,23946,15163.3
+,"85+ years","85+","Female","F","Nevada","32",3554,26576,13373.0
+,"85+ years","85+","Female","F","New Hampshire","33",2773,18427,15048.6
+,"85+ years","85+","Female","F","New Jersey","34",15947,120647,13217.9
+,"85+ years","85+","Female","F","New Mexico","35",3224,24132,13359.9
+,"85+ years","85+","Female","F","New York","36",32908,281386,11695.0
+,"85+ years","85+","Female","F","North Carolina","37",17162,114126,15037.8
+,"85+ years","85+","Female","F","North Dakota","38",1334,11550,11549.8
+,"85+ years","85+","Female","F","Ohio","39",22468,147124,15271.5
+,"85+ years","85+","Female","F","Oklahoma","40",6397,42343,15107.6
+,"85+ years","85+","Female","F","Oregon","41",7286,47139,15456.4
+,"85+ years","85+","Female","F","Pennsylvania","42",27680,192003,14416.4
+,"85+ years","85+","Female","F","Rhode Island","44",2272,16237,13992.7
+,"85+ years","85+","Female","F","South Carolina","45",8484,56934,14901.5
+,"85+ years","85+","Female","F","South Dakota","46",1591,12475,12753.5
+,"85+ years","85+","Female","F","Tennessee","47",11350,72098,15742.5
+,"85+ years","85+","Female","F","Texas","48",34509,246095,14022.6
+,"85+ years","85+","Female","F","Utah","49",3537,21291,16612.7
+,"85+ years","85+","Female","F","Vermont","50",1323,8525,15519.1
+,"85+ years","85+","Female","F","Virginia","51",13443,94940,14159.5
+,"85+ years","85+","Female","F","Washington","53",11024,78727,14002.8
+,"85+ years","85+","Female","F","West Virginia","54",3559,22969,15494.8
+,"85+ years","85+","Female","F","Wisconsin","55",11231,72454,15500.9
+,"85+ years","85+","Female","F","Wyoming","56",908,6213,14614.5
+"Total","85+ years","85+","Female","F",,,534800,3911019,13674.2
+,"85+ years","85+","Male","M","Alabama","01",5204,31941,16292.5
+,"85+ years","85+","Male","M","Alaska","02",428,2737,15637.6
+,"85+ years","85+","Male","M","Arizona","04",7898,64140,12313.7
+,"85+ years","85+","Male","M","Arkansas","05",3320,20887,15895.1
+,"85+ years","85+","Male","M","California","06",38079,266227,14303.2
+,"85+ years","85+","Male","M","Colorado","08",5281,32388,16305.4
+,"85+ years","85+","Male","M","Connecticut","09",4465,28231,15815.9
+,"85+ years","85+","Male","M","Delaware","10",1158,7394,15661.3
+,"85+ years","85+","Male","M","District of Columbia","11",377,3793,9939.4
+,"85+ years","85+","Male","M","Florida","12",29285,239052,12250.5
+,"85+ years","85+","Male","M","Georgia","13",8312,54438,15268.7
+,"85+ years","85+","Male","M","Hawaii","15",1791,15160,11814.0
+,"85+ years","85+","Male","M","Idaho","16",2031,12411,16364.5
+,"85+ years","85+","Male","M","Illinois","17",13126,85207,15404.8
+,"85+ years","85+","Male","M","Indiana","18",7378,41824,17640.6
+,"85+ years","85+","Male","M","Iowa","19",4173,24537,17007.0
+,"85+ years","85+","Male","M","Kansas","20",3544,20744,17084.5
+,"85+ years","85+","Male","M","Kentucky","21",4653,27221,17093.4
+,"85+ years","85+","Male","M","Louisiana","22",4216,27214,15492.0
+,"85+ years","85+","Male","M","Maine","23",2114,11687,18088.5
+,"85+ years","85+","Male","M","Maryland","24",5871,40313,14563.5
+,"85+ years","85+","Male","M","Massachusetts","25",8266,48989,16873.2
+,"85+ years","85+","Male","M","Michigan","26",11599,67820,17102.6
+,"85+ years","85+","Male","M","Minnesota","27",6757,42031,16076.2
+,"85+ years","85+","Male","M","Mississippi","28",2851,17236,16541.0
+,"85+ years","85+","Male","M","Missouri","29",7222,43050,16775.8
+,"85+ years","85+","Male","M","Montana","30",1432,8663,16530.1
+,"85+ years","85+","Male","M","Nebraska","31",2394,13816,17327.7
+,"85+ years","85+","Male","M","Nevada","32",2812,20204,13918.0
+,"85+ years","85+","Male","M","New Hampshire","33",1785,10432,17110.8
+,"85+ years","85+","Male","M","New Jersey","34",9649,66058,14606.9
+,"85+ years","85+","Male","M","New Mexico","35",2407,16008,15036.2
+,"85+ years","85+","Male","M","New York","36",20394,151261,13482.7
+,"85+ years","85+","Male","M","North Carolina","37",10548,63516,16606.8
+,"85+ years","85+","Male","M","North Dakota","38",948,5985,15839.6
+,"85+ years","85+","Male","M","Ohio","39",14062,79424,17705.0
+,"85+ years","85+","Male","M","Oklahoma","40",4160,25009,16634.0
+,"85+ years","85+","Male","M","Oregon","41",5048,29869,16900.5
+,"85+ years","85+","Male","M","Pennsylvania","42",17073,100490,16989.8
+,"85+ years","85+","Male","M","Rhode Island","44",1370,8089,16936.6
+,"85+ years","85+","Male","M","South Carolina","45",5442,32635,16675.3
+,"85+ years","85+","Male","M","South Dakota","46",1098,6266,17523.1
+,"85+ years","85+","Male","M","Tennessee","47",6883,40713,16906.1
+,"85+ years","85+","Male","M","Texas","48",22689,145670,15575.6
+,"85+ years","85+","Male","M","Utah","49",2693,15344,17550.8
+,"85+ years","85+","Male","M","Vermont","50",858,4952,17326.3
+,"85+ years","85+","Male","M","Virginia","51",8778,54677,16054.3
+,"85+ years","85+","Male","M","Washington","53",7854,48415,16222.2
+,"85+ years","85+","Male","M","West Virginia","54",2315,14056,16469.8
+,"85+ years","85+","Male","M","Wisconsin","55",7509,41579,18059.6
+,"85+ years","85+","Male","M","Wyoming","56",604,4158,14526.2
+"Total","85+ years","85+","Male","M",,,350204,2283961,15333.2
+"Total","85+ years","85+",,,,,885004,6194980,14285.8
+"Total",,,,,,,885004,6194980,14285.8
+"---"
+"Dataset: Underlying Cause of Death, 2018-2023, Single Race"
+"Query Parameters:"
+"Ten-Year Age Groups: 85+ years"
+"Year/Month: 2023"
+"Group By: Ten-Year Age Groups; Sex; State"
+"Show Totals: True"
+"Show Zero Values: True"
+"Show Suppressed: True"
+"Calculate Rates Per: 100,000"
+"Rate Options: Default intercensal populations for years 2001-2009 (except Infant Age Groups)"
+"---"
+"Help: See http://wonder.cdc.gov/wonder/help/ucd-expanded.html for more information."
+"---"
+"Query Date: Dec 4, 2025 1:56:54 PM"
+"---"
+"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+"System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files,"
+"2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
+"Program. Accessed at http://wonder.cdc.gov/ucd-icd10-expanded.html on Dec 4, 2025 1:56:54 PM"
+"---"
+Caveats:
+"1. Deaths of persons with Age ""Not Stated"" are included in ""All"" counts and rates, but are not distributed among age groups,"
+"so are not included in age-specific counts, age-specific rates or in any age-adjusted rates. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Not Stated."
+"2. The population figures for years 2023 are single-race estimates of the July 1 resident population, from the Vintage 2023"
+"postcensal series released by the Census Bureau on June 27, 2024. The 2023 series is based on the Modified Blended Base produced"
+"by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The Modified Blended Base consists of the blend"
+"of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic Analysis Estimates, and 2020 Census data"
+"from the internal Census Edited File (CEF). The population figures for years 2022 are single-race estimates of the July 1"
+"resident population, from the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023. The 2022 series is"
+"based on the Modified Blended Base produced by the US Census Bureau in lieu of the April 1, 2020 decennial population count. The"
+"Modified Blended Base consists of the blend of Vintage 2020 postcensal population estimates for April 1, 2020, 2020 Demographic"
+"Analysis Estimates, and 2020 Census data from the internal Census Edited File (CEF). The population figures for years 2021 are"
+"single-race estimates of the July 1 resident population, based on the Blended Base produced by the US Census Bureau in lieu of"
+"the April 1, 2020 decennial population count, from the Vintage 2021 postcensal series released by the Census Bureau on June 30,"
+"2022. The population figures for year 2020 are single-race estimates of the July 1 resident population, from the Vintage 2020"
+"postcensal series based on April 2010 Census, released by the Census Bureau on July 27, 2021. The population figures for year"
+"2019 are single-race estimates of the July 1 resident population, from the Vintage 2019 postcensal series based on April 2010"
+"Census, released by the Census Bureau on June 25, 2020. The population figures for year 2018 are single-race estimates of the"
+"July 1 resident population, from the Vintage 2018 postcensal series based on April 2010 Census, released by the Census Bureau on"
+"June 20, 2019. More information: http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Population Data."
+"3. Connecticut population estimates for 2022 and later years are reported for 9 planning regions as county equivalent areas,"
+"instead of the former 8 legacy counties in the Vintage 2022 postcensal series released by the Census Bureau on June 22, 2023,"
+"and in the Vintage 2023 postcensal series released by the Census Bureau on June 27, 2024. Populations estimates for the former"
+"counties are not available for 2022 and later years. More information:"
+"http://wonder.cdc.gov/wonder/help/ucd-expanded.html#Connecticut-2022."
+"4. After the creation of the final 2023 dataset, North Carolina updated the cause of death information for over 900 death"
+"certificates to include a cause of death code indicating drug overdose (ICD-10 underlying cause-of-death codes: X40-X44,"
+"X60-X64, X85, and Y10-Y14). Jurisdictions can continue to update death certificates after the closing of the mortality file. As"
+"a result, users should consider that the actual death count for drug overdose deaths for North Carolina in 2023 is over 4,400"
+"deaths, with a crude rate of approximately 41.0 per 100,000 population, and an age-adjusted rate of approximately 42.1 per"
+"100,000 population. These deaths will not be updated on the final mortality datasets."
