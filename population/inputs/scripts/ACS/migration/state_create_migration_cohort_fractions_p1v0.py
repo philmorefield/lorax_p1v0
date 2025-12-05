@@ -3,10 +3,12 @@ import os
 import pandas as pd
 
 
+
 BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
 if os.path.isdir('C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'):
     BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'
 PROCESSED_FILES = os.path.join(BASE_FOLDER, 'inputs\\processed_files')
+ACS_FOLDER = os.path.join(BASE_FOLDER, 'inputs\\raw_files\\ACS')
 
 
 def retrieve_sex_ratios():
@@ -35,7 +37,35 @@ def retrieve_age_ratios():
     return df
 
 
+def get_2025_migration_rates():
+    columns = ('D_STFIPS', 'D_COFIPS', 'O_STFIPS','D_STATE', 'D_COUNTY',
+               'O_STATE', 'FLOW', 'FLOW_MOE', 'D_POP', 'D_POP_MOE',
+               'D_NONMOVERS', 'D_NONMOVERS_MOE', 'D_MOVERS', 'D_MOVERS_MOE',
+               'D_MOVERS_SAME_CY', 'D_MOVERS_SAME_CY_MOE',
+               'D_MOVERS_FROM_DIFF_CY_SAME_ST',
+               'D_MOVERS_FROM_DIFF_CY_SAME_ST_MOE', 'D_MOVERS_FROM_DIFF_ST',
+               'D_MOVERS_DIFF_ST_MOE', 'D_MOVERS_FROM_ABROAD',
+               'D_MOVERS_FROM_ABROAD_MOE', 'O_POP', 'O_POP_MOE', 'O_NONMOVERS',
+               'O_NOMMOVERS_MOE', 'O_MOVERS', 'O_MOVERS_MOE',
+               'O_MOVERS_PUERTO_RICO', 'O_MOVERS_PUERTO_RICO_MOE')
+
+    xls = pd.ExcelFile(os.path.join(ACS_FOLDER, '2018_2022', 'migration', 'state-to-county-migration-flows-acs-2018-2022.xlsx'))
+    df = pd.concat([xls.parse(sheet_name=name, header=None, names=columns, skiprows=4, skipfooter=10) for name in xls.sheet_names if name != 'Puerto Rico'])
+
+    df = df[~df.O_STFIPS.str.contains('XXX')]
+    foreign = ('EUR', 'ASI', 'SAM', 'ISL', 'NAM', 'CAM', 'CAR', 'AFR', 'OCE')
+    df = df.loc[~df.O_STFIPS.isin(foreign), ['D_STFIPS', 'D_COFIPS', 'O_STFIPS', 'O_POP', 'FLOW']]
+
+    df['DESTINATION_FIPS'] = df.D_STFIPS.astype(int).astype(str).str.zfill(2)
+    df['ORIGIN_FIPS'] = df.O_STFIPS.astype(int).astype(str).str.zfill(2)
+
+    return df
+
+
+
+
 def main():
+    current_migration = get_2025_migration_rates()
     sex = retrieve_sex_ratios()
     age = retrieve_age_ratios()
 
@@ -93,9 +123,7 @@ def main():
     df85_plus = df75_79.copy()
     df85_plus['AGE_GROUP'] = '85+'
 
-
     df = pd.concat([df, df10_14, df15_19, df30_34, df40_44, df50_54, df70_74, df75_79, df80_84, df85_plus], ignore_index=True)
-
 
     df.to_csv(os.path.join(PROCESSED_FILES, 'migration', 'state_acs_gross_migration_age_sex_fractions_2011_2015.csv'),
               index=False)
