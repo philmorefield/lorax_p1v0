@@ -3,7 +3,6 @@ import os
 import pandas as pd
 
 
-
 BASE_FOLDER = 'D:\\OneDrive\\lorax_p1v0\\population'
 if os.path.isdir('C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'):
     BASE_FOLDER = 'C:\\Users\\philm\\OneDrive\\lorax_p1v0\\population'
@@ -25,8 +24,6 @@ def retrieve_sex_ratios():
 
 
 def retrieve_age_ratios():
-    print("Processing age ratios...")
-
     csv = os.path.join(PROCESSED_FILES, 'migration', 'state_acs_gross_migration_ratios_2011_2015_age.csv')
     df = pd.read_csv(csv)
 
@@ -38,6 +35,12 @@ def retrieve_age_ratios():
 
 
 def get_2025_migration_rates():
+    '''
+    Calculate migration rates from ACS 2018-2022 state-to-county migration
+    data. These are the most current ACS rates available and will be
+    used to re-scale the 2011-2015 age-group migration rates.
+    '''
+
     columns = ('D_STFIPS', 'D_COFIPS', 'O_STFIPS','D_STATE', 'D_COUNTY',
                'O_STATE', 'FLOW', 'FLOW_MOE', 'D_POP', 'D_POP_MOE',
                'D_NONMOVERS', 'D_NONMOVERS_MOE', 'D_MOVERS', 'D_MOVERS_MOE',
@@ -54,14 +57,21 @@ def get_2025_migration_rates():
 
     df = df[~df.O_STFIPS.str.contains('XXX')]
     foreign = ('EUR', 'ASI', 'SAM', 'ISL', 'NAM', 'CAM', 'CAR', 'AFR', 'OCE')
-    df = df.loc[~df.O_STFIPS.isin(foreign), ['D_STFIPS', 'D_COFIPS', 'O_STFIPS', 'O_POP', 'FLOW']]
-
+    df = df.loc[~df.O_STFIPS.isin(foreign)].rename(columns={'O_POP': 'ORIGIN_POPULATION'})
     df['DESTINATION_FIPS'] = df.D_STFIPS.astype(int).astype(str).str.zfill(2)
     df['ORIGIN_FIPS'] = df.O_STFIPS.astype(int).astype(str).str.zfill(2)
+    df = df.loc[df.ORIGIN_FIPS != '72']  # exclude Puerto Rico
+    df = df[['ORIGIN_FIPS', 'DESTINATION_FIPS', 'ORIGIN_POPULATION', 'FLOW']]
+
+    assert df.isnull().sum().sum() == 0, "Null values found in migration data!"
+
+    df = (df.groupby(by=['ORIGIN_FIPS', 'DESTINATION_FIPS'], as_index=False)
+            .agg({'ORIGIN_POPULATION': 'first', 'FLOW': 'sum'})
+            .query('ORIGIN_FIPS != DESTINATION_FIPS')) # exclude within-state moves
+    df['MIGRATION_RATE'] = df['FLOW'] / df['ORIGIN_POPULATION']
+    df = df[['ORIGIN_FIPS', 'DESTINATION_FIPS', 'MIGRATION_RATE']]
 
     return df
-
-
 
 
 def main():
