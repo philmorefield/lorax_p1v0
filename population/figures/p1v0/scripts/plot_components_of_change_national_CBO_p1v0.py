@@ -1,5 +1,7 @@
 import datetime
 import os
+from pyexpat.errors import XML_ERROR_FEATURE_REQUIRES_XML_DTD
+from ssl import get_default_verify_paths
 
 import pandas as pd
 import seaborn as sns
@@ -50,26 +52,19 @@ def get_cbo_population():
     n = 101
     df_list = [df[i:i+n] for i in range(0, df.shape[0], n)]
 
-    for i, df_item in enumerate(df_list):
-        df_item.loc[:, 'YEAR'] = 2022 + i
+    i = 0
+    for df in df_list:
+        df['YEAR'] = 2022 + i
+        i += 1
 
     df = pd.concat(df_list, ignore_index=True)
 
     return df
 
 
-def main():
-
+def get_total_population_data():
+    """Get total population data from historical census and CBO projections"""
     cbo = get_cbo_population()
-
-    fig = plt.figure(constrained_layout=True)
-    gs = fig.add_gridspec(3, 2)
-
-    ######################
-    ## TOTAL POPULATION ##
-    ######################
-
-    ax_pop = fig.add_subplot(gs[0, :1])
 
     # historical population, 2010-2020
     csv_folder = os.path.join(CENSUS_CSV_PATH, '2020', 'intercensal')
@@ -99,7 +94,6 @@ def main():
 
     # future population
     proj_pop = pd.read_csv(os.path.join(PROJECTIONS_FOLDER, f'population_by_age_group_sex_{SCENARIO}.csv'))
-
     proj_pop = proj_pop.drop(columns=['GEOID', 'AGE_GROUP', 'SEX']).sum()
     proj_pop = proj_pop.reset_index()
     proj_pop.columns = ['YEAR', 'POPULATION']
@@ -107,34 +101,22 @@ def main():
     proj_pop['POPULATION'] = proj_pop['POPULATION'] / 1000000
 
     # CBO future population
-    # cbo_pop = cbo.loc[cbo['YEAR'] >= 2025, ['TOTAL_POPULATION', 'YEAR']]
     cbo_pop = cbo[['TOTAL_POPULATION', 'YEAR']]
     cbo_pop = cbo_pop.groupby(by='YEAR', as_index=False).sum()
     cbo_pop = cbo_pop.rename(columns={'TOTAL_POPULATION': 'POPULATION'})
     cbo_pop['POPULATION'] = cbo_pop['POPULATION'] / 1000000
 
-    sns.lineplot(x='YEAR', y='POPULATION', data=histpop, linewidth=2, color='gray', legend=False, ax=ax_pop, label='U.S. Census\n(intercensal estimate)')
-    sns.lineplot(x='YEAR', y='POPULATION', data=cbo_pop, linewidth=2, color='purple', legend=False, ax=ax_pop, label='CBO projection')
-    # sns.lineplot(x='YEAR', y='POPULATION', data=proj_pop, linewidth=2, color='orange', markers='o', legend=False, ax=ax_pop, label='p1v1 projection')
-    sns.scatterplot(x='YEAR', y='POPULATION', data=proj_pop, color='orange', markers='o', legend=False, ax=ax_pop, label='p1v0 projection')
+    return histpop, proj_pop, cbo_pop
 
-    plt.title('U.S. POPULATION')
-    ax_pop.set_xticklabels([])
-    plt.gca().set_xlabel("")
-    plt.gca().set_ylabel("")
-    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
-    fig.legend(bbox_to_anchor=(0.925, 0.925))
 
-    ############
-    ## BIRTHS ##
-    ############
+def get_births_data():
+    """Get births data from historical census and CBO projections"""
+    cbo = get_cbo_population()
 
-    # historical births
+    # historical births 2010-2020
     columns = ['SUMLEV'] + ['BIRTHS' + str(year) for year in range(2010, 2021)]
-    ax_births = fig.add_subplot(gs[1, :1])
     csv = os.path.join(CENSUS_CSV_PATH, '2020\\intercensal\\co-est2020-alldata.csv')
     hist_births = pd.read_csv(csv, encoding='latin-1')
-
     hist_births = hist_births[columns]
     hist_births = hist_births.query('SUMLEV == 50')
     hist_births = hist_births.drop(columns='SUMLEV').sum().reset_index()
@@ -183,29 +165,15 @@ def main():
     cbo_births = cbo_births.rename(columns={'VALUE': 'BIRTHS'})
     cbo_births['BIRTHS'] = cbo_births['BIRTHS'] / 1000000
 
-    sns.lineplot(x='YEAR', y='BIRTHS', data=hist_births, linewidth=2, color='gray', legend=False, ax=ax_births)
-    # sns.lineplot(x='YEAR', y='BIRTHS', data=proj_births, linewidth=2, color='orange', legend=False, ax=ax_births)
-    sns.scatterplot(x='YEAR', y='BIRTHS', data=proj_births, color='orange', markers='o', legend=False, ax=ax_births, label='p1v0 projection')
-    sns.lineplot(x='YEAR', y='BIRTHS', data=post2020_births, linewidth=2, color='gray', legend=False, ax=ax_births)
-    sns.lineplot(x='YEAR', y='BIRTHS', data=cbo_births, linewidth=2, color='purple', legend=False, ax=ax_births)
+    return hist_births, post2020_births, proj_births, cbo_births
 
-    plt.title('BIRTHS')
-    ax_births.set_xticklabels([])
-    ax_births.set_xlabel("")
-    ax_births.set_ylabel("Millions")
-    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
 
-    ############################
-    ## NET DOMESTIC MIGRATION ##
-    ############################
-
-    # historical migration
-    ax_migration = fig.add_subplot(gs[1, 1:])
-
+def get_migration_data():
+    """Get domestic migration data from historical census and projections"""
+    # historical migration 2010-2020
     columns = ['SUMLEV'] + ['DOMESTICMIG' + str(year) for year in range(2010, 2021)]
     csv = os.path.join(CENSUS_CSV_PATH, '2020\\intercensal\\co-est2020-alldata.csv')
     hist_migration = pd.read_csv(csv, encoding='latin-1')
-
     hist_migration = hist_migration[columns]
     hist_migration = hist_migration.query('SUMLEV == 50').clip(lower=0)
     hist_migration = hist_migration.drop(columns='SUMLEV').sum().reset_index()
@@ -238,22 +206,12 @@ def main():
     proj_migration['YEAR'] = proj_migration['YEAR'].astype(int)
     proj_migration['MIGRATION'] = (proj_migration['MIGRATION'] / 1000000)
 
-    sns.lineplot(x='YEAR', y='MIGRATION', data=hist_migration, linewidth=2, color='gray', legend=False, ax=ax_migration)
-    # sns.lineplot(x='YEAR', y='MIGRATION', data=proj_migration, linewidth=2, color='orange', legend=False, ax=ax_migration)
-    sns.scatterplot(x='YEAR', y='MIGRATION', data=proj_migration, color='orange', markers='o', legend=False, ax=ax_migration, label='p1v0 projection')
-    sns.lineplot(x='YEAR', y='MIGRATION', data=post2020_migration, linewidth=2, color='gray', legend=False, ax=ax_migration)
+    return hist_migration, post2020_migration, proj_migration
 
-    plt.title('MIGRATION')
-    ax_migration.set_xticklabels([])
-    ax_migration.set_xlabel("")
-    ax_migration.set_ylabel("")
-    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
 
-    ############
-    ## DEATHS ##
-    ############
-
-    ax_deaths = fig.add_subplot(gs[2, :1])
+def get_deaths_data():
+    """Get deaths data from historical census and CBO projections"""
+    cbo = get_cbo_population()
 
     # historical deaths, 2010-2020
     columns = ['SUMLEV'] + ['DEATHS' + str(year) for year in range(2010, 2021)]
@@ -303,7 +261,6 @@ def main():
                            value_vars=['female', 'male'],
                            value_name='VALUE',
                            var_name='SEX')
-
     cbo_pop = cbo_pop.query('YEAR >= 2025')
     cbo_pop = cbo_pop.set_index(['YEAR', 'AGE', 'SEX'])
 
@@ -312,23 +269,11 @@ def main():
     cbo_deaths = cbo_deaths.rename(columns={'VALUE': 'DEATHS'})
     cbo_deaths['DEATHS'] = cbo_deaths['DEATHS'] / 1000000
 
-    sns.lineplot(x='YEAR', y='DEATHS', data=hist_deaths, linewidth=2, color='gray', legend=False, ax=ax_deaths)
-    # sns.lineplot(x='YEAR', y='DEATHS', data=proj_deaths, linewidth=2, color='orange', legend=False, ax=ax_deaths)
-    sns.scatterplot(x='YEAR', y='DEATHS', data=proj_deaths, color='orange', markers='o', legend=False, ax=ax_deaths, label='p1v0 projection')
-    sns.lineplot(x='YEAR', y='DEATHS', data=post2020_deaths, linewidth=2, color='gray', legend=False, ax=ax_deaths)
-    sns.lineplot(x='YEAR', y='DEATHS', data=cbo_deaths, linewidth=2, color='purple', legend=False, ax=ax_deaths)
+    return hist_deaths, post2020_deaths, proj_deaths, cbo_deaths
 
-    plt.title('DEATHS')
-    ax_deaths.set_xlabel('')
-    ax_deaths.set_ylabel('')
-    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
 
-    #####################
-    ## NET IMMIGRATION ##
-    #####################
-
-    ax_immig = fig.add_subplot(gs[2, 1:])
-
+def get_immigration_data():
+    """Get immigration data from historical census and projections"""
     # historical immigration, 2010-2020
     csv = os.path.join(CENSUS_CSV_PATH, '2020\\intercensal\\co-est2020-alldata.csv')
     hist_immig = pd.read_csv(csv, encoding='latin-1')
@@ -360,8 +305,121 @@ def main():
     proj_immig['YEAR'] = proj_immig['YEAR'].astype(int)
     proj_immig['IMMIGRATION'] = proj_immig['IMMIGRATION'] / 1000000 / 5
 
+    return hist_immig, post2020_immig, proj_immig
+
+
+def get_uva_population_data():
+    """Get UVA population data for comparison"""
+    columns = ['STFIPS', 'NAME', 'SEX', 'POPULATION', '0_TO_4', '5_TO_9', '10_TO_14', '15_TO_19', '20_TO_24',
+               '25_TO_29', '30_TO_34', '35_TO_39', '40_TO_44', '45_TO_49', '50_TO_54', '55_TO_59', '60_TO_64',
+               '65_TO_69', '70_TO_74', '75_TO_79', '80_TO_84', '85_PLUS',]
+
+    df = None
+    for year in range(2020, 2060, 10):
+        temp = pd.read_excel(io=os.path.join(BASE_FOLDER, 'inputs', 'raw_files', 'UVA', f'NationalProjections_ProjectedAgeSexDistribution_2030-2050.xlsx'),
+                             sheet_name=f'{year}',
+                             names=columns,
+                             header=None,
+                             skiprows=4,
+                             skipfooter=1)
+        temp['YEAR'] = year
+        temp = temp.query('STFIPS == 0 & SEX == "Total"')[['POPULATION', 'YEAR']]
+        if df is None:
+            df = temp
+        else:
+            df = pd.concat([df, temp], ignore_index=True)
+
+    df['POPULATION'] = df['POPULATION'] / 1000000
+
+    return df
+
+def main():
+    # Get all data using separate functions
+    uva_pop = get_uva_population_data()
+    histpop, proj_pop, cbo_pop = get_total_population_data()
+    hist_births, post2020_births, proj_births, cbo_births = get_births_data()
+    hist_migration, post2020_migration, proj_migration = get_migration_data()
+    hist_deaths, post2020_deaths, proj_deaths, cbo_deaths = get_deaths_data()
+    hist_immig, post2020_immig, proj_immig = get_immigration_data()
+
+
+    fig = plt.figure(constrained_layout=True)
+    gs = fig.add_gridspec(3, 2)
+
+    ######################
+    ## TOTAL POPULATION ##
+    ######################
+
+    ax_pop = fig.add_subplot(gs[0, :1])
+
+    sns.lineplot(x='YEAR', y='POPULATION', data=histpop, linewidth=2, color='gray', legend=False, ax=ax_pop, label='U.S. Census\n(intercensal estimate)')
+    sns.lineplot(x='YEAR', y='POPULATION', data=cbo_pop, linewidth=2, color='purple', legend=False, ax=ax_pop, label='CBO')
+    sns.lineplot(x='YEAR', y='POPULATION', data=uva_pop, linewidth=2, color='green', legend=False, ax=ax_pop, label='UVA')
+    sns.scatterplot(x='YEAR', y='POPULATION', data=proj_pop, color='orange', markers='o', legend=False, ax=ax_pop, label='p1v0')
+
+    plt.title('U.S. POPULATION')
+    ax_pop.set_xticklabels([])
+    plt.gca().set_xlabel("")
+    plt.gca().set_ylabel("")
+    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
+    fig.legend(bbox_to_anchor=(0.925, 0.925))
+
+    ############
+    ## BIRTHS ##
+    ############
+
+    ax_births = fig.add_subplot(gs[1, :1])
+
+    sns.lineplot(x='YEAR', y='BIRTHS', data=hist_births, linewidth=2, color='gray', legend=False, ax=ax_births)
+    sns.scatterplot(x='YEAR', y='BIRTHS', data=proj_births, color='orange', markers='o', legend=False, ax=ax_births, label='p1v0 projection')
+    sns.lineplot(x='YEAR', y='BIRTHS', data=post2020_births, linewidth=2, color='gray', legend=False, ax=ax_births)
+    sns.lineplot(x='YEAR', y='BIRTHS', data=cbo_births, linewidth=2, color='purple', legend=False, ax=ax_births)
+
+    plt.title('BIRTHS')
+    ax_births.set_xticklabels([])
+    ax_births.set_xlabel("")
+    ax_births.set_ylabel("Millions")
+    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
+
+    ############################
+    ## NET DOMESTIC MIGRATION ##
+    ############################
+
+    ax_migration = fig.add_subplot(gs[1, 1:])
+
+    sns.lineplot(x='YEAR', y='MIGRATION', data=hist_migration, linewidth=2, color='gray', legend=False, ax=ax_migration)
+    sns.scatterplot(x='YEAR', y='MIGRATION', data=proj_migration, color='orange', markers='o', legend=False, ax=ax_migration, label='p1v0 projection')
+    sns.lineplot(x='YEAR', y='MIGRATION', data=post2020_migration, linewidth=2, color='gray', legend=False, ax=ax_migration)
+
+    plt.title('MIGRATION')
+    ax_migration.set_xticklabels([])
+    ax_migration.set_xlabel("")
+    ax_migration.set_ylabel("")
+    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
+
+    ############
+    ## DEATHS ##
+    ############
+
+    ax_deaths = fig.add_subplot(gs[2, :1])
+
+    sns.lineplot(x='YEAR', y='DEATHS', data=hist_deaths, linewidth=2, color='gray', legend=False, ax=ax_deaths)
+    sns.scatterplot(x='YEAR', y='DEATHS', data=proj_deaths, color='orange', markers='o', legend=False, ax=ax_deaths, label='p1v0 projection')
+    sns.lineplot(x='YEAR', y='DEATHS', data=post2020_deaths, linewidth=2, color='gray', legend=False, ax=ax_deaths)
+    sns.lineplot(x='YEAR', y='DEATHS', data=cbo_deaths, linewidth=2, color='purple', legend=False, ax=ax_deaths)
+
+    plt.title('DEATHS')
+    ax_deaths.set_xlabel('')
+    ax_deaths.set_ylabel('')
+    plt.gca().set_xlim(xmin=YEAR_MIN, xmax=YEAR_MAX)
+
+    #####################
+    ## NET IMMIGRATION ##
+    #####################
+
+    ax_immig = fig.add_subplot(gs[2, 1:])
+
     sns.lineplot(x='YEAR', y='IMMIGRATION', data=hist_immig, linewidth=2, color='gray', legend=False, ax=ax_immig)
-    # sns.lineplot(x='YEAR', y='IMMIGRATION', data=proj_immig, linewidth=2, color='orange', legend=False, ax=ax_immig)
     sns.scatterplot(x='YEAR', y='IMMIGRATION', data=proj_immig, color='orange', markers='o', legend=False, ax=ax_immig, label='p1v0 projection')
     sns.lineplot(x='YEAR', y='IMMIGRATION', data=post2020_immig, linewidth=2, color='gray', legend=False, ax=ax_immig)
 

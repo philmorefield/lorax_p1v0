@@ -494,7 +494,7 @@ class Projector():
         print("Calculating domestic migration...")
 
         # get the age-sex migration rates specific to each ORIGIN-DESTINATION
-        rates = pl.read_csv(os.path.join(PROCESSED_FILES, 'migration', 'state_acs_gross_migration_age_sex_fractions_2011_2015.csv'))
+        rates = pl.read_csv(os.path.join(PROCESSED_FILES, 'migration', 'state_adjusted_acs_gross_migration_age_sex_fractions_2011_2015.csv'))
         rates = rates.with_columns([pl.col('ORIGIN_FIPS').cast(pl.String).str.zfill(2).alias('ORIGIN_FIPS'),
                                    pl.col('DESTINATION_FIPS').cast(pl.String).str.zfill(2).alias('DESTINATION_FIPS')])
 
@@ -532,8 +532,8 @@ class Projector():
         # store time series of migration in sqlite3
         if self.current_projection_year == self.launch_year + 5:
             migration = self.net_migration.rename({'NET_MIGRATION': f'NETMIG{self.current_projection_year}',
-                                                    'INFLOWS': f'INMIG{self.current_projection_year}',
-                                                    'OUTFLOWS': f'OUTMIG{self.current_projection_year}'}).clone()
+                                                   'INFLOWS': f'INMIG{self.current_projection_year}',
+                                                   'OUTFLOWS': f'OUTMIG{self.current_projection_year}'}).clone()
         else:
             migration = (pl.read_csv(os.path.join(OUTPUT_FOLDER, f'migration_by_age_group_sex_{self.scenario}.csv'))
                          .with_columns([pl.col('GEOID').cast(pl.String).str.zfill(2)]))
